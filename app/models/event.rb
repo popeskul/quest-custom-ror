@@ -11,4 +11,6 @@ class Event < ApplicationRecord
       self.errors[:start] << 'must be a valid date' if self.starttime > self.endtime
     end
   end
+
+  paginates_per 10
 end
