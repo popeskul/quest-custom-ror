@@ -20,13 +20,13 @@ RSpec.describe Event, type: :model do
 
       describe 'comparing two dates' do
         starttime = DateTime.new(2021, 10, 28, 0, 0, 0)
-        endtime = DateTime.new(2021, 10, 29, 0, 0, 0)
+        endtime   = DateTime.new(2021, 10, 29, 0, 0, 0)
 
-        let(:good_event) { Event.new(title: 'Title', location: 'Location', organizeremail: 'email@mail.com', starttime: starttime, endtime: endtime) }
-        let(:bad_event) { Event.new(title: 'Title', location: 'Location', organizeremail: 'email@mail.com', starttime: endtime, endtime: starttime) }
+        let(:good_event) { create(:event) }
+        let(:bad_event)  { Event.new(title: 'Title', location: 'Location', organizeremail: 'email@mail.com', starttime: endtime, endtime: starttime) }
 
-        it { good_event.should be_valid }
-        it { bad_event.should_not be_valid }
+        it { expect(good_event).to be_valid }
+        it { expect(bad_event).not_to be_valid }
       end
     end
   end
