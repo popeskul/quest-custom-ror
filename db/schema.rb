@@ -10,24 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2021_08_30_195954) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "categories", id: :serial, force: :cascade do |t|
-    t.string "title", limit: 25, null: false
-  end
-
-  create_table "questions", id: :serial, force: :cascade do |t|
-    t.string "body", limit: 100, null: false
-    t.integer "test_id"
-  end
-
-  create_table "tests", id: :serial, force: :cascade do |t|
-    t.string "title", limit: 50, null: false
-    t.integer "category_id"
-    t.integer "level"
+  create_table "events", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "description"
+    t.string "location", null: false
+    t.string "organizeremail", null: false
+    t.string "organizertelegram"
+    t.string "link"
+    t.datetime "starttime", null: false
+    t.datetime "endtime", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
 end
