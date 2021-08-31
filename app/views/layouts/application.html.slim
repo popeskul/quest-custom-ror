@@ -11,4 +11,6 @@ html.h-100
   body.d-flex.flex-column.h-100
     .page-content
       .container
+        .flash= render 'shared/flash_errors'
+
         = yield

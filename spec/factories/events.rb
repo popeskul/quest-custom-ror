@@ -9,4 +9,9 @@ FactoryBot.define do
     sequence(:starttime)         { |n| DateTime.new(2021, 10, n, 0, 0, 0) }
     sequence(:endtime)           { |n| DateTime.new(2021, 10, n + 1, 0, 0, 0) }
   end
+
+  trait :invalid_dates do
+    sequence(:starttime)         { |n| DateTime.new(2021, 10, n + 1, 0, 0, 0) }
+    sequence(:endtime)           { |n| DateTime.new(2021, 10, n, 0, 0, 0) }
+  end
 end
