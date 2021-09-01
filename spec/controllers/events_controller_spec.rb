@@ -64,4 +64,18 @@ RSpec.describe EventsController, type: :controller do
       expect(response).to render_template :show
     end
   end
+
+  describe 'DELETE #destroy' do
+    let!(:event) { create(:event) }
+    let(:delete_event) { delete :destroy, params: { id: event.id } }
+
+    it 'successfully delete the question' do
+      expect { delete_event }.to change(Event, :count).by(-1)
+    end
+
+    it 'successfully redirects to index' do
+      delete_event
+      expect(response).to redirect_to events_path
+    end
+  end
 end

@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: %i[edit update show]
+  before_action :set_event, only: %i[edit update show destroy]
 
   def index
     @events = Event.page params[:page]
@@ -25,6 +25,15 @@ class EventsController < ApplicationController
       redirect_to @event, notice: 'Your event successfully updated.'
     else
       redirect_to :edit
+    end
+  end
+
+  def destroy
+    if @event.destroy
+      flash[:notice] = 'Question was successfully deleted'
+      redirect_to events_path
+    else
+      redirect_to @event
     end
   end
 

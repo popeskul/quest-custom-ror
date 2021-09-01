@@ -1,6 +1,6 @@
-= link_to 'Create an event', new_event_path
+= link_to 'Create an event', new_event_path, class: 'btn btn-primary mb-3'
 
-ul.events
+ul.events.list-group.mb-3
   = render @events
 
 = paginate @events
