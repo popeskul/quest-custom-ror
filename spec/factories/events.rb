@@ -6,12 +6,12 @@ FactoryBot.define do
     sequence(:organizeremail)    { |n| "email#{n}@mail.com" }
     sequence(:organizertelegram) { |n| "email#{n}@mail.com" }
     sequence(:link)              { |n| "link#{n}" }
-    sequence(:starttime)         { |n| DateTime.new(2021, 10, n, 0, 0, 0) }
-    sequence(:endtime)           { |n| DateTime.new(2021, 10, n + 1, 0, 0, 0) }
+    sequence(:starttime)         { |n| DateTime.new(2000 + n, 10, 1) }
+    sequence(:endtime)           { |n| DateTime.new(2000 + (n + 1), 10, 1) }
   end
 
   trait :invalid_dates do
-    sequence(:starttime)         { |n| DateTime.new(2021, 10, n + 1, 0, 0, 0) }
-    sequence(:endtime)           { |n| DateTime.new(2021, 10, n, 0, 0, 0) }
+    sequence(:starttime)         { |n| DateTime.new(2000 + (n + 1), 10, 1) }
+    sequence(:endtime)           { |n| DateTime.new(2000 + n, 10, 1) }
   end
 end

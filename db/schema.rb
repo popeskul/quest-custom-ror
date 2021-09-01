@@ -22,8 +22,8 @@ ActiveRecord::Schema.define(version: 2021_08_30_195954) do
     t.string "organizeremail", null: false
     t.string "organizertelegram"
     t.string "link"
-    t.datetime "starttime", null: false
-    t.datetime "endtime", null: false
+    t.date "starttime", null: false
+    t.date "endtime", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

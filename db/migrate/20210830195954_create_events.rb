@@ -7,8 +7,8 @@ class CreateEvents < ActiveRecord::Migration[6.1]
       t.string :organizeremail, null: false
       t.string :organizertelegram
       t.string :link
-      t.datetime :starttime, null: false
-      t.datetime :endtime, null: false
+      t.date :starttime, null: false
+      t.date :endtime, null: false
 
       t.timestamps
     end

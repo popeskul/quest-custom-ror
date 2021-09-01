@@ -20,17 +20,19 @@ class EventsController < ApplicationController
     end
   end
 
+  def edit; end
+
   def update
     if @event.update(event_params)
       redirect_to @event, notice: 'Your event successfully updated.'
     else
-      redirect_to :edit
+      render :edit
     end
   end
 
   def destroy
     if @event.destroy
-      flash[:notice] = 'Question was successfully deleted'
+      flash[:notice] = 'Question was successfully deleted.'
       redirect_to events_path
     else
       redirect_to @event

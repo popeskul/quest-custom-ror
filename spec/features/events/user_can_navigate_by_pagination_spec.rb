@@ -4,10 +4,13 @@ feature 'User can navigate events', '
   In order to view events, user can navigate
   by pagination
 ' do
-  given!(:create_events) { create_list(:event, 15) }
+  given(:create_events) { create_list(:event, 15) }
 
   describe 'User can navigate events' do
-    before { visit events_path }
+    before do
+      create_events
+      visit events_path
+    end
 
     it 'User can view first page' do
       within '.events' do
