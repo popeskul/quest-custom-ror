@@ -19,8 +19,8 @@ RSpec.describe Event, type: :model do
       it { should_not allow_value('').for(:endtime) }
 
       describe 'comparing two dates' do
-        starttime = DateTime.new(2021, 10, 28, 0, 0, 0)
-        endtime   = DateTime.new(2021, 10, 29, 0, 0, 0)
+        starttime = DateTime.new(2021, 10, 28)
+        endtime   = DateTime.new(2021, 10, 29)
 
         let(:good_event) { create(:event) }
         let(:bad_event)  { Event.new(title: 'Title', location: 'Location', organizeremail: 'email@mail.com', starttime: endtime, endtime: starttime) }
