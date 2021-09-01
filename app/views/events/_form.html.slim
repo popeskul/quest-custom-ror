@@ -1,0 +1,19 @@
+= simple_form_for event, local: true do |f|
+  .mb-3
+    = f.input :title, label_html: { class: 'form-label' }, input_html: { class: 'form-control' }
+  .mb-3
+    = f.input :description, label_html: { class: 'form-label' }
+  .mb-3
+    = f.input :location, label_html: { class: 'form-label' }
+  .mb-3
+    = f.input :organizer_email, as: :email, label_html: { class: 'form-label' }
+  .mb-3
+    = f.input :organizer_telegram, as: :url, label_html: { class: 'form-label' }
+  .mb-3
+    = f.input :link, as: :url, label_html: { class: 'form-label' }
+  .mb-3
+    = f.input :start_time, as: :date, label_html: { class: 'form-label' }
+  .mb-3
+    = f.input :end_time, as: :date, label_html: { class: 'form-label' }
+  .mb-3
+    = f.button :submit, class: 'btn btn-primary'

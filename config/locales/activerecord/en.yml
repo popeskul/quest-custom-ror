@@ -1,0 +1,16 @@
+en:
+  invalid_email: 'invalid email'
+  invalid_date: 'must be a valid date'
+
+  activerecord:
+    models:
+      event: "Event"
+
+    attributes:
+      event:
+        title: "Title"
+
+    errors:
+      messages:
+        required: "Required field"
+        blank: "Can't be empty"
