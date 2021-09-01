@@ -12,7 +12,7 @@ feature 'User can delete an event', '
     scenario 'successfully delete' do
       click_on 'Delete event'
 
-      expect(page).to have_content 'Question was successfully deleted.'
+      expect(page).to have_content 'Event was successfully deleted.'
     end
   end
 end

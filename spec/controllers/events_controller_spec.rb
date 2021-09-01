@@ -33,7 +33,7 @@ RSpec.describe EventsController, type: :controller do
     context 'with valid attributes' do
       subject { post :create, params: { event: attributes_for(:event), format: :js } }
 
-      it 'save a new answer' do
+      it 'save a new event' do
         expect { subject }.to change(Event, :count).by(1)
       end
 
@@ -46,7 +46,7 @@ RSpec.describe EventsController, type: :controller do
     context 'with invalid attributes' do
       subject { post :create, params: { event: attributes_for(:event, :invalid_dates), format: :js } }
 
-      it 'does not save the new answer in the database' do
+      it 'does not save the new event in the database' do
         expect { subject }.to_not change(Event, :count)
       end
 

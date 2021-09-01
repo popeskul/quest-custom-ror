@@ -32,7 +32,7 @@ class EventsController < ApplicationController
 
   def destroy
     if @event.destroy
-      flash[:notice] = 'Question was successfully deleted.'
+      flash[:notice] = 'Event was successfully deleted.'
       redirect_to events_path
     else
       redirect_to @event
