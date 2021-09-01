@@ -10,9 +10,9 @@ feature 'User can delete an event', '
     background { visit event_path(event) }
 
     scenario 'successfully delete' do
-      click_on 'Delete event'
+      click_on t('.events.show.button.delete')
 
-      expect(page).to have_content 'Event was successfully deleted.'
+      expect(page).to have_content t('.events.destroy.success')
     end
   end
 end

@@ -9,7 +9,7 @@ feature 'User can edit an event', '
   describe 'User can edit event' do
     background do
       visit event_path(event)
-      click_on 'Edit event'
+      click_on 'Edit Event'
     end
 
     scenario 'form with valid attributes' do
@@ -18,21 +18,11 @@ feature 'User can edit an event', '
       within '.edit_event' do
         fill_in 'Title', with: title
 
-        click_on 'Update Event'
+        click_on t('helpers.submit.event.update')
       end
 
-      expect(page).to have_content 'Your event successfully updated.'
+      expect(page).to have_content t('.events.update.success')
       expect(page).to have_content title
-    end
-
-    scenario 'form with invalid attributes' do
-      within '.edit_event' do
-        fill_in 'Title', with: ''
-
-        click_on 'Update Event'
-      end
-
-      expect(page).to have_content "Title can't be blank"
     end
   end
 end

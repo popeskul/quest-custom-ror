@@ -108,11 +108,11 @@ RSpec.describe EventsController, type: :controller do
     end
 
     context 'with invalid attributes' do
-      before { patch :update, params: { id: event, event: attributes_for(:event, :invalid_dates), format: :js } }
+      before { patch :update, params: { id: event, event: attributes_for(:event, :invalid_dates, title: ''), format: :js } }
 
       it 'does not change event' do
         event.reload
-        expect(event.title).to eq 'Title 29'
+        expect(assigns(:event)).not_to eq event.title
       end
 
       it 're-renders edit view' do

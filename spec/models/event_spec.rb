@@ -6,24 +6,27 @@ RSpec.describe Event, type: :model do
     it { should validate_presence_of :location }
 
     context 'validate email' do
-      it { should     allow_value('valid@mail.com').for(:organizeremail) }
-      it { should_not allow_value('').for(:organizeremail) }
-      it { should_not allow_value('wrong').for(:organizeremail) }
+      it { should     allow_value('valid@mail.com').for(:organizer_email) }
+      it { should_not allow_value('').for(:organizer_email) }
+      it { should_not allow_value('wrong').for(:organizer_email) }
     end
 
     context 'validate dates' do
-      it { should validate_presence_of :starttime }
-      it { should validate_presence_of :endtime }
+      it { should validate_presence_of :start_time }
+      it { should validate_presence_of :end_time }
 
-      it { should_not allow_value('').for(:starttime) }
-      it { should_not allow_value('').for(:endtime) }
+      it { should_not allow_value('').for(:start_time) }
+      it { should_not allow_value('').for(:end_time) }
 
       describe 'comparing two dates' do
-        starttime = DateTime.new(2021, 10, 28)
-        endtime   = DateTime.new(2021, 10, 29)
+        start_time = DateTime.new(2021, 10, 28)
+        end_time   = DateTime.new(2021, 10, 29)
 
         let(:good_event) { create(:event) }
-        let(:bad_event)  { Event.new(title: 'Title', location: 'Location', organizeremail: 'email@mail.com', starttime: endtime, endtime: starttime) }
+        let(:bad_event)  do
+          Event.new(title: 'Title', location: 'Location', organizer_email: 'email@mail.com', start_time: end_time,
+                    end_time: start_time)
+        end
 
         it { expect(good_event).to be_valid }
         it { expect(bad_event).not_to be_valid }

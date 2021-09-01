@@ -1,0 +1,8 @@
+en:
+  helpers:
+    submit:
+      event:
+        create: "Create Event"
+        update: "Update Event"
+        edit: "Edit Event"
+        delete: "Delete Event"

@@ -1,7 +1,7 @@
 p = @event.title
 
 .mb-3
-  = link_to 'Edit event', edit_event_path(@event), class: 'btn btn-outline-primary'
+  = link_to t('.button.edit'), edit_event_path(@event), class: 'btn btn-outline-primary'
 
 .mb-3
-  = link_to 'Delete event', event_path(@event), method: :delete, class: 'btn btn-outline-danger'
+  = link_to t('.button.delete'), event_path(@event), method: :delete, class: 'btn btn-outline-danger'
