@@ -3,9 +3,6 @@ en:
   invalid_date: 'must be a valid date'
 
   activerecord:
-    invalid_email: 'invalid email'
-    invalid_date: 'must be a valid date'
-
     models:
       event: "Event"
 

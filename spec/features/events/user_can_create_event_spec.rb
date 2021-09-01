@@ -12,7 +12,6 @@ feature 'User can create an event', '
 
       within '.new_event' do
         fill_in t('.simple_form.labels.event.title'), with: title
-        fill_in t('.simple_form.labels.event.description'), with: 'text text'
         fill_in t('.simple_form.labels.event.location'), with: 'location location'
         fill_in t('.simple_form.labels.event.organizer_email'), with: 'email@mail.com'
 
@@ -20,16 +19,12 @@ feature 'User can create an event', '
           have_select 'event_start_time_1i', selected: '2021'
           have_select 'event_start_time_2i', selected: 'September'
           have_select 'event_start_time_3i', selected: '1'
-          have_select 'event_start_time_4i', selected: '01'
-          have_select 'event_start_time_5i', selected: '01'
         end
 
         within '.event_end_time' do
-          have_select 'event_end_time_1i', selected: '2021'
-          have_select 'event_end_time_2i', selected: 'October'
-          have_select 'event_end_time_3i', selected: '1'
-          have_select 'event_end_time_4i', selected: '01'
-          have_select 'event_end_time_5i', selected: '01'
+          have_select '#event_end_time_1i', selected: '2022'
+          have_select '#event_end_time_2i', selected: 'September'
+          have_select '#event_end_time_3i', selected: '1'
         end
 
         click_on t('helpers.submit.event.create')
