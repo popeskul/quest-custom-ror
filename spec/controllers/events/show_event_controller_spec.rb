@@ -6,7 +6,7 @@ RSpec.describe EventsController, type: :controller do
   let(:event) { create(:event) }
   let!(:user) { create(:user) }
 
-  before { sign_in(user) }
+  before { login(user) }
 
   describe '#show' do
     before { get :show, params: { id: event.id } }

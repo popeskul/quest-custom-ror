@@ -6,7 +6,7 @@ RSpec.describe EventsController, type: :controller do
   let(:event) { create(:event) }
   let!(:user) { create(:user) }
 
-  before { sign_in(user) }
+  before { login(user) }
 
   describe '#index' do
     let(:events) { create_list(:event, 15) }

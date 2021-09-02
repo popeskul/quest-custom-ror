@@ -6,7 +6,7 @@ RSpec.describe EventsController, type: :controller do
   let(:event) { create(:event) }
   let!(:user) { create(:user) }
 
-  before { sign_in(user) }
+  before { login(user) }
 
   context 'Update with valid attributes' do
     it 'changes event attributes' do
