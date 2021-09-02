@@ -1,0 +1,28 @@
+env:
+  global:
+    - CC_TEST_REPORTER_ID=02113260ae107eefaae091504b984e53e34afa209e37612aeb2acf67189c1e07
+language: ruby
+rvm:
+  - 2.7.3
+cache:
+  - bundler
+  - yarn
+addons:
+  chrome: stable
+services:
+  - postgresql
+before_install:
+  - nvm install --lts
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+before_script:
+  - bundle install --jobs=3 --retry=3
+  - yarn
+  - bundle exec rake db:create db:migrate
+  - bundle exec rake db:schema:load
+script:
+  — bundle exec rspec spec/
+after_script:
+  - ./cc-test-reporter format-coverage -t simplecov -o coverage/.resultset.json
+  - ./cc-test-reporter sum-coverage coverage/.resultset.json
+  - if [[ "$TRAVIS_TEST_RESULT" == 0 ]]; then ./cc-test-reporter upload-coverage; fi
