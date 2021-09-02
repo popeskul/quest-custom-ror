@@ -8,8 +8,8 @@ feature 'User can create an event', '
     given!(:user) { create(:user) }
 
     background do
-      visit new_event_path
       sign_in(user)
+      visit new_event_path
     end
 
     scenario 'User can create event with valid attributes' do
