@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Event, type: :model do
@@ -7,7 +9,6 @@ RSpec.describe Event, type: :model do
 
     context 'validate email' do
       it { should     allow_value('valid@mail.com').for(:organizer_email) }
-      it { should_not allow_value('').for(:organizer_email) }
       it { should_not allow_value('wrong').for(:organizer_email) }
     end
 

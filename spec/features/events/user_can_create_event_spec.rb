@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 feature 'User can create an event', '
@@ -19,12 +21,6 @@ feature 'User can create an event', '
         fill_in t('.simple_form.labels.event.title'), with: title
         fill_in t('.simple_form.labels.event.location'), with: 'location location'
         fill_in t('.simple_form.labels.event.organizer_email'), with: 'email@mail.com'
-
-        within '.event_start_time' do
-          have_select 'event_start_time_1i', selected: '2021'
-          have_select 'event_start_time_2i', selected: 'September'
-          have_select 'event_start_time_3i', selected: '1'
-        end
 
         within '.event_end_time' do
           have_select '#event_end_time_1i', selected: '2022'

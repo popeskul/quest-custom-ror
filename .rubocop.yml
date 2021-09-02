@@ -51,3 +51,50 @@ Layout/MultilineOperationIndentation:
   Enabled: true
   Exclude:
     - 'bin/**/*'
+
+Style/StderrPuts:
+  Enabled: true
+  Exclude:
+    - 'bin/**/*'
+
+Layout/MultilineMethodCallIndentation:
+  Enabled: true
+  Exclude:
+    - 'bin/**/*'
+
+Layout/DotPosition:
+  Enabled: true
+  Exclude:
+    - 'bin/**/*'
+
+Style/FrozenStringLiteralComment:
+  Enabled: true
+  Exclude:
+    - 'bin/**/*'
+
+Layout/LineLength:
+  Enabled: true
+  Exclude:
+    - 'bin/**/*'
+    - 'config/**/*'
+
+Layout/ArgumentAlignment:
+  Enabled: true
+  Exclude:
+    - 'bin/**/*'
+
+Style/InverseMethods:
+  Enabled: true
+  Exclude:
+    - 'bin/**/*'
+    -
+Metrics/BlockLength:
+  Enabled: true
+  Exclude:
+    - 'bin/**/*'
+    - 'config/**/*'
+
+Style/Documentation:
+  Enabled: true
+  Exclude:
+    - 'db/**/*'

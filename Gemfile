@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -38,7 +40,6 @@ end
 
 group :test do
   gem 'capybara', '>= 3.26'
-  gem 'launchy'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers', '~> 5.0'
   gem 'simplecov', require: false

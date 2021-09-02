@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Controller for events
 class EventsController < ApplicationController
   before_action :authenticate_user!, only: %i[edit udpate destroy]
   before_action :set_event, only: %i[edit update show destroy]

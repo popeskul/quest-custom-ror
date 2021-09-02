@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 require 'i18n'
 
+# Helpers for features
 module FeatureHelpers
   def t(key)
     I18n.t(key)
