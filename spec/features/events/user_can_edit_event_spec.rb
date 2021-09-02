@@ -5,9 +5,11 @@ feature 'User can edit an event', '
   to the show page and fill form
 ' do
   given!(:event) { create(:event) }
+  given!(:user) { create(:user) }
 
-  describe 'User can edit event' do
+  describe 'Authenticated user can edit event' do
     background do
+      sign_in(user)
       visit event_path(event)
       click_on 'Edit Event'
     end

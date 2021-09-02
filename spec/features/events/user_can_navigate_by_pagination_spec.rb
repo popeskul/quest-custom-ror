@@ -5,9 +5,11 @@ feature 'User can navigate events', '
   by pagination
 ' do
   given(:create_events) { create_list(:event, 15) }
+  given!(:user) { create(:user) }
 
-  describe 'User can navigate events' do
+  describe 'Authenticated user can navigate events' do
     before do
+      sign_in(user)
       create_events
       visit events_path
     end

@@ -5,9 +5,13 @@ feature 'User can delete an event', '
   to the show page and press delete button
 ' do
   given!(:event) { create(:event) }
+  given!(:user) { create(:user) }
 
-  describe 'User can delete event' do
-    background { visit event_path(event) }
+  describe 'Authenticated user can delete event' do
+    background do
+      sign_in(user)
+      visit event_path(event)
+    end
 
     scenario 'successfully delete' do
       click_on t('.events.show.button.delete')

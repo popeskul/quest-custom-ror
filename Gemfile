@@ -3,6 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.3'
 
+gem 'devise'
 gem 'jbuilder', '~> 2.7'
 gem 'kaminari'
 gem 'pg', '~> 1.1'
@@ -23,6 +24,7 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'factory_bot_rails'
   gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'master'
+  gem 'launchy'
   gem 'rails-controller-testing'
   gem 'rspec-rails', '~> 5.0.0'
 end

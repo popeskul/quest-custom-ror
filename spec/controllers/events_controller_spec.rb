@@ -2,6 +2,9 @@ require 'rails_helper'
 
 RSpec.describe EventsController, type: :controller do
   let(:event) { create(:event) }
+  let!(:user) { create(:user) }
+
+  before { sign_in(user) }
 
   describe '#index' do
     let(:events) { create_list(:event, 15) }

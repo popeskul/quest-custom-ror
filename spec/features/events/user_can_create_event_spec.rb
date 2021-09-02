@@ -4,10 +4,15 @@ feature 'User can create an event', '
   In order to create an event, user need to go
   to the form page and fill the form
 ' do
-  describe 'User can create form' do
-    background { visit new_event_path }
+  describe 'Authenticated user' do
+    given!(:user) { create(:user) }
 
-    scenario 'form with valid attributes' do
+    background do
+      visit new_event_path
+      sign_in(user)
+    end
+
+    scenario 'User can create event with valid attributes' do
       title = 'title title'
 
       within '.new_event' do

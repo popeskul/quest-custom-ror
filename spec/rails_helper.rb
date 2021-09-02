@@ -19,9 +19,8 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
-  # TODO: implement
-  # config.include Devise::Test::ControllerHelpers, type: :controller
-  # config.include ControllerHelpers, type: :controller
+  config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include ControllerHelpers, type: :controller
   config.include FeatureHelpers, type: :feature
 
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
