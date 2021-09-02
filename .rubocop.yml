@@ -98,3 +98,8 @@ Style/Documentation:
   Enabled: true
   Exclude:
     - 'db/**/*'
+
+Metrics/LineLength:
+  Enabled: true
+  Exclude:
+    - 'config/**/*'
