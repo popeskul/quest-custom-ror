@@ -31,11 +31,7 @@ class EventsController < ApplicationController
   end
 
   def destroy
-    if @event.destroy
-      redirect_to events_path, notice: t('.success')
-    else
-      redirect_to @event
-    end
+    redirect_to events_path, notice: t('.success') if @event.destroy
   end
 
   private
