@@ -9,6 +9,8 @@
 .idea/
 .DS_Store
 coverage/
+logfile
+
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
