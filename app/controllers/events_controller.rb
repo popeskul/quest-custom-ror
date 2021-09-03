@@ -2,7 +2,7 @@
 
 # Controller for events
 class EventsController < ApplicationController
-  before_action :authenticate_user!, only: %i[edit udpate destroy]
+  before_action :authenticate_user!, except: %i[index show]
   before_action :set_event, only: %i[edit update show destroy]
 
   def index
@@ -16,7 +16,7 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = Event.new(event_params)
+    @event = current_user.events.new(event_params)
     if @event.save
       redirect_to @event, notice: t('.success')
     else
@@ -35,7 +35,11 @@ class EventsController < ApplicationController
   end
 
   def destroy
-    redirect_to events_path, notice: t('.success') if @event.destroy
+    if current_user.author_of?(@event)
+      redirect_to events_path, notice: t('.success') if @event.destroy
+    else
+      redirect_to @event
+    end
   end
 
   private

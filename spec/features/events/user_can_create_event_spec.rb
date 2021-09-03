@@ -22,11 +22,8 @@ feature 'User can create an event', '
         fill_in t('.simple_form.labels.event.location'), with: 'location location'
         fill_in t('.simple_form.labels.event.organizer_email'), with: 'email@mail.com'
 
-        within '.event_end_time' do
-          have_select '#event_end_time_1i', selected: '2022'
-          have_select '#event_end_time_2i', selected: 'September'
-          have_select '#event_end_time_3i', selected: '1'
-        end
+        fill_in t('.simple_form.labels.event.start_time'), with: '2021-09-03'
+        fill_in t('.simple_form.labels.event.end_time'), with: '2022-09-03'
 
         click_on t('helpers.submit.event.create')
       end

@@ -6,8 +6,8 @@ feature 'User can edit an event', '
   In order to update an event, user need to go
   to the show page and fill form
 ' do
-  given!(:event) { create(:event) }
   given!(:user) { create(:user) }
+  given!(:event) { create(:event, author_id: user.id) }
 
   describe 'Authenticated user can edit event' do
     background do

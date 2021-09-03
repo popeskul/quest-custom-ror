@@ -3,8 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe EventsController, type: :controller do
-  let(:event) { create(:event) }
   let!(:user) { create(:user) }
+  let(:event) { create(:event, author_id: user.id) }
 
   before { login(user) }
 

@@ -12,10 +12,10 @@ FactoryBot.define do
     link                               { Faker::Internet.url }
     sequence(:start_time)        { |n| DateTime.new(2000 + n, 10, 1) }
     sequence(:end_time)          { |n| DateTime.new(2000 + (n + 1), 10, 1) }
-  end
 
-  trait :invalid_dates do
-    sequence(:start_time)        { |n| DateTime.new(2000 + (n + 1), 10, 1) }
-    sequence(:end_time)          { |n| DateTime.new(2000 + n, 10, 1) }
+    trait :invalid_dates do
+      sequence(:start_time)        { |n| DateTime.new(2000 + (n + 1), 10, 1) }
+      sequence(:end_time)          { |n| DateTime.new(2000 + n, 10, 1) }
+    end
   end
 end

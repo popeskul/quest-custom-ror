@@ -3,14 +3,14 @@
 require 'rails_helper'
 
 RSpec.describe EventsController, type: :controller do
-  let(:event) { create(:event) }
   let!(:user) { create(:user) }
-
-  before { login(user) }
+  let!(:event) { create(:event, author_id: user.id) }
 
   describe '#create' do
+    before { login(user) }
+
     context 'with valid attributes' do
-      subject { post :create, params: { event: attributes_for(:event), format: :js } }
+      subject { post :create, params: { event: attributes_for(:event) } }
 
       it 'save a new event' do
         expect { subject }.to change(Event, :count).by(1)

@@ -3,13 +3,13 @@
 require 'rails_helper'
 
 RSpec.describe EventsController, type: :controller do
-  let(:event) { create(:event) }
   let!(:user) { create(:user) }
+  let(:event) { create(:event, author_id: user.id) }
 
   before { login(user) }
 
   describe '#index' do
-    let(:events) { create_list(:event, 15) }
+    let(:events) { create_list(:event, 15, author_id: user.id) }
 
     before { get :index }
 
