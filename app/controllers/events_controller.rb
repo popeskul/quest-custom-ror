@@ -2,8 +2,10 @@
 
 # Controller for events
 class EventsController < ApplicationController
+  load_and_authorize_resource
+
   before_action :authenticate_user!, except: %i[index show]
-  before_action :set_event, only: %i[edit update show destroy]
+  before_action :load_event, only: %i[edit update show destroy]
 
   def index
     @events = Event.page params[:page]
@@ -16,7 +18,8 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = current_user.events.new(event_params)
+    @event = Event.new(event_params.merge(author_id: current_user.id))
+
     if @event.save
       redirect_to @event, notice: t('.success')
     else
@@ -35,8 +38,8 @@ class EventsController < ApplicationController
   end
 
   def destroy
-    if current_user.author_of?(@event)
-      redirect_to events_path, notice: t('.success') if @event.destroy
+    if can?(:delete, @event) && @event.destroy
+      redirect_to events_path, notice: t('.success')
     else
       redirect_to @event
     end
@@ -44,7 +47,7 @@ class EventsController < ApplicationController
 
   private
 
-  def set_event
+  def load_event
     @event = Event.find(params[:id])
   end
 

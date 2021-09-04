@@ -3,3 +3,6 @@ AllCops:
     - bin/**/*
     - config/**/*
     - db/**/*
+
+Metrics/BlockLength:
+  IgnoredMethods: ['describe', 'context']

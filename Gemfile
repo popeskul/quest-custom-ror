@@ -5,13 +5,13 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.3'
 
+gem 'cancancan'
 gem 'devise'
 gem 'jbuilder', '~> 2.7'
 gem 'kaminari'
 gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
 gem 'rails', '~> 6.1.4'
-gem 'rubocop', require: false
 gem 'sass-rails', '>= 6'
 gem 'simple_form'
 gem 'slim-rails'
@@ -30,6 +30,7 @@ group :development, :test do
   gem 'launchy'
   gem 'rails-controller-testing'
   gem 'rspec-rails', '~> 5.0.0'
+  gem 'rubocop', require: false
 end
 
 group :development do
