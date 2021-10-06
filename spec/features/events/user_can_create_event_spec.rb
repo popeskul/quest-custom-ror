@@ -12,7 +12,7 @@ feature 'User can create an event', '
 
       background do
         sign_in(admin)
-        visit new_admin_event_path
+        visit new_event_path
       end
 
       scenario 'User can create event with valid attributes' do

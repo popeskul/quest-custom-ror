@@ -13,7 +13,7 @@ feature 'User can edit an event', '
     describe 'as admin' do
       background do
         sign_in(admin)
-        visit admin_event_path(event)
+        visit event_path(event)
         click_on 'Edit Event'
       end
 

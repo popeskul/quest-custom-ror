@@ -78,7 +78,7 @@ RSpec.describe Admin::EventsController, type: :controller do
 
       it 'redirects to show' do
         subject
-        expect(response).to redirect_to admin_event_path(assigns(:event))
+        expect(response).to redirect_to event_path(assigns(:event))
       end
     end
 
@@ -109,7 +109,7 @@ RSpec.describe Admin::EventsController, type: :controller do
 
       it 'successfully redirects to index' do
         delete_event
-        expect(response).to redirect_to admin_events_path
+        expect(response).to redirect_to events_path
       end
     end
 
@@ -149,7 +149,7 @@ RSpec.describe Admin::EventsController, type: :controller do
       it 'redirect to updated event' do
         patch :update, params: { id: event, event: attributes_for(:event) }
 
-        expect(response).to redirect_to admin_event_path(Event.last)
+        expect(response).to redirect_to event_path(Event.last)
       end
     end
 

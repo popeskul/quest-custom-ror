@@ -5,9 +5,15 @@ Rails.application.routes.draw do
 
   root to: 'events#index'
 
-  resources :events, only: :index
+  # resources :events, only: :index
 
-  namespace :admin do
-    resources :events
-  end
+  # namespace :admin do
+  #   resources :events
+  # end
+
+  # scope module: 'admin' do
+  #   resources :events
+  # end
+
+  resources :events, module: 'admin'
 end

@@ -25,7 +25,7 @@ module Admin
       @event = Event.new(event_params.merge(author_id: current_user.id))
 
       if @event.save
-        redirect_to admin_event_path(@event), notice: t('.success')
+        redirect_to event_path(@event), notice: t('.success')
       else
         render :new
       end
@@ -39,7 +39,7 @@ module Admin
       authorize @event
 
       if @event.update(event_params)
-        redirect_to admin_event_path(@event), notice: t('.success')
+        redirect_to event_path(@event), notice: t('.success')
       else
         render :edit
       end
@@ -49,7 +49,7 @@ module Admin
       authorize @event
 
       @event.destroy
-      redirect_to admin_events_path, notice: t('.success')
+      redirect_to events_path, notice: t('.success')
     end
 
     private

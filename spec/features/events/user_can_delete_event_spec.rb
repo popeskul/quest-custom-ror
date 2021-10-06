@@ -15,7 +15,7 @@ feature 'User can delete an event', '
     describe 'as admin' do
       background do
         sign_in(admin)
-        visit admin_event_path(event)
+        visit event_path(event)
       end
 
       scenario 'can delete his own event' do
