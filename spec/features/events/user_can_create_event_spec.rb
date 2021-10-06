@@ -8,7 +8,7 @@ feature 'User can create an event', '
 ' do
   context 'Authenticated user' do
     describe 'as admin' do
-      given!(:admin) { create(:user, admin: true ) }
+      given!(:admin) { create(:user, admin: true) }
 
       background do
         sign_in(admin)
