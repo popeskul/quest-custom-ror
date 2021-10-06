@@ -7,7 +7,7 @@ class EventPolicy < ApplicationPolicy
   end
 
   def edit?
-    author? if user
+    author? if present?
   end
 
   def create?
@@ -15,11 +15,11 @@ class EventPolicy < ApplicationPolicy
   end
 
   def destroy?
-    author? if user
+    author? if present?
   end
 
   def update?
-    author? if user
+    author? if present?
   end
 
   private
@@ -29,6 +29,6 @@ class EventPolicy < ApplicationPolicy
   end
 
   def author?
-    user&.id == record.author_id
+    user.id == record.author_id
   end
 end

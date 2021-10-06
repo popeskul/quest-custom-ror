@@ -1,14 +1,14 @@
 header
   nav.navbar.navbar-expand-lg.navbar-dark.text-white.bg-primary
     .container-fluid
-      = link_to 'Quest', root_path, class: 'navbar-brand'
+      = link_to 'Quest', current_user&.admin? ? admin_events_path : root_path, class: 'navbar-brand'
 
       button.navbar-toggler aria-controls="navbarNav" aria-expanded="false" aria-label=("Toggle navigation") data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button"
         span.navbar-toggler-icon
 
       #navbarNav.collapse.navbar-collapse
         ul.navbar-nav.align-items-center.me-auto.mb-2.mb-lg-0
-          li.nav-item= link_to 'all events', events_path, class: 'nav-link text-white'
+          li.nav-item = link_to 'all events', current_user&.admin? ? admin_events_path : root_path, class: 'nav-link text-white'
           - if user_signed_in?
             li.nav-item
               = current_user.email

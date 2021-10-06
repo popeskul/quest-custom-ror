@@ -6,19 +6,23 @@ feature 'User can delete an event', '
   In order to delete an event, user need to go
   to the show page and press delete button
 ' do
+  given!(:admin) { create(:user, admin: true) }
   given!(:user) { create(:user) }
-  given!(:event) { create(:event, author_id: user.id) }
 
-  describe 'Authenticated user can delete event' do
-    background do
-      sign_in(user)
-      visit event_path(event)
-    end
+  given!(:event) { create(:event, author_id: admin.id) }
 
-    scenario 'can delete his own event' do
-      click_on t('.events.show.button.delete')
+  context 'Authenticated user can delete event' do
+    describe 'as admin' do
+      background do
+        sign_in(admin)
+        visit admin_event_path(event)
+      end
 
-      expect(page).to have_content t('.events.destroy.success')
+      scenario 'can delete his own event' do
+        click_on t('.admin.events.show.button.delete')
+
+        expect(page).to have_content t('.admin.events.destroy.success')
+      end
     end
   end
 end

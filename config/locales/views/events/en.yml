@@ -1,15 +1,18 @@
 en:
-  events:
-    index:
+  admin:
+    events:
+      index:
+        button:
+          create: 'Create Event'
       button:
-        create: 'Create Event'
-    show:
-      button:
-        edit: 'Edit Event'
-        delete: 'Delete event'
-    create:
-      success: 'Your event successfully created.'
-    update:
-      success: 'Your event successfully updated.'
-    destroy:
-      success: 'Event was successfully deleted.'
+          create: 'Create Event'
+      show:
+        button:
+          edit: 'Edit Event'
+          delete: 'Delete event'
+      create:
+        success: 'Your event successfully created.'
+      update:
+        success: 'Your event successfully updated.'
+      destroy:
+        success: 'Event was successfully deleted.'
