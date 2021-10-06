@@ -2,6 +2,8 @@
 
 require 'spec_helper'
 require 'simplecov'
+require 'pundit/rspec'
+
 SimpleCov.start
 
 ENV['RAILS_ENV'] ||= 'test'

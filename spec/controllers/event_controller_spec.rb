@@ -6,13 +6,13 @@ RSpec.describe EventsController, type: :controller do
   let(:user) { create(:user) }
   let(:user2) { create(:user) }
 
-  let(:event) { create(:event, author_id: user.id) }
+  let!(:event) { create(:event, author_id: user.id) }
   let(:event2) { create(:event, author_id: user2.id) }
 
   let(:delete_event) { delete :destroy, params: { id: event.id } }
   let(:delete_event2) { delete :destroy, params: { id: event2.id } }
 
-  describe '#create' do
+  describe 'POST #create' do
     before { login(user) }
 
     context 'with valid attributes' do
@@ -44,13 +44,10 @@ RSpec.describe EventsController, type: :controller do
     end
   end
 
-  describe '#destroy' do
-    before do
-      allow_any_instance_of(CanCan::ControllerResource).to receive(:load_and_authorize_resource) { nil }
-      login(user)
-    end
-
+  describe 'DELETE #destroy' do
     context 'If event belongs to the user' do
+      before { login(user) }
+
       it 'successfully delete the event' do
         event
         expect { delete_event }.to change(Event, :count).by(-1)
@@ -63,19 +60,28 @@ RSpec.describe EventsController, type: :controller do
     end
 
     context 'If event does not belong to the user' do
-      it 'con not delete another event' do
-        event2
-        expect { delete_event2 }.to_not change(Event, :count)
+      context 'authenticated user' do
+        before { login(user2) }
+
+        it 'con not delete another event' do
+          expect { delete_event2 }.to_not change(Event, :count)
+        end
       end
 
-      it 're-renders show view' do
-        delete_event2
-        expect(response).to redirect_to event2
+      context 'not authenticated user' do
+        it 'con not delete question' do
+          expect { delete_event }.to_not change(Event, :count)
+        end
+
+        it 'redirects to login page' do
+          delete_event
+          expect(response).to redirect_to new_user_session_path
+        end
       end
     end
   end
 
-  describe '#edit' do
+  describe 'GET #edit' do
     before do
       login(user)
       get :edit, params: { id: event.id }
@@ -86,7 +92,7 @@ RSpec.describe EventsController, type: :controller do
     end
   end
 
-  describe '#index' do
+  describe 'GET #index' do
     let(:events) { create_list(:event, 15, author_id: user.id) }
 
     before do
@@ -103,7 +109,7 @@ RSpec.describe EventsController, type: :controller do
     end
   end
 
-  describe '#new' do
+  describe 'GET #new' do
     before do
       login(user)
       get :new
@@ -118,7 +124,7 @@ RSpec.describe EventsController, type: :controller do
     end
   end
 
-  describe '#show' do
+  describe 'GET #show' do
     before do
       login(user)
       get :show, params: { id: event.id }
@@ -129,7 +135,7 @@ RSpec.describe EventsController, type: :controller do
     end
   end
 
-  describe '#update' do
+  describe 'PATCH #update' do
     before { login(user) }
 
     context 'Update with valid attributes' do

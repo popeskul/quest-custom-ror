@@ -2,8 +2,6 @@
 
 # Controller for events
 class EventsController < ApplicationController
-  load_and_authorize_resource
-
   before_action :authenticate_user!, except: %i[index show]
   before_action :load_event, only: %i[edit update show destroy]
 
@@ -14,10 +12,14 @@ class EventsController < ApplicationController
   def show; end
 
   def new
+    authorize Event
+
     @event = Event.new
   end
 
   def create
+    authorize Event
+
     @event = Event.new(event_params.merge(author_id: current_user.id))
 
     if @event.save
@@ -27,9 +29,13 @@ class EventsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    authorize @event
+  end
 
   def update
+    authorize @event
+
     if @event.update(event_params)
       redirect_to @event, notice: t('.success')
     else
@@ -38,11 +44,10 @@ class EventsController < ApplicationController
   end
 
   def destroy
-    if can?(:delete, @event) && @event.destroy
-      redirect_to events_path, notice: t('.success')
-    else
-      redirect_to @event
-    end
+    authorize @event
+
+    @event.destroy
+    redirect_to events_path, notice: t('.success')
   end
 
   private

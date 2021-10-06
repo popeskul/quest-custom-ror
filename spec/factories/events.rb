@@ -4,6 +4,7 @@ require 'faker'
 
 FactoryBot.define do
   factory :event do
+    association :author, factory: :user
     title                              { Faker::Name.name }
     description                        { Faker::Lorem.sentence }
     location                           { Faker::Address.full_address }
