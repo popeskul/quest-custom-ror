@@ -54,7 +54,9 @@ RSpec.describe Admin::EventsController, type: :controller do
     end
 
     context 'Update with invalid attributes' do
-      before { patch :update, params: { id: existing_event, event: attributes_for(:event, :invalid_dates), format: :js } }
+      before do
+        patch :update, params: { id: existing_event, event: attributes_for(:event, :invalid_dates), format: :js }
+      end
 
       it 'does not change event' do
         existing_event.reload

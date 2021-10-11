@@ -12,7 +12,7 @@ feature 'User can delete an event', '
   given!(:existing_event) { create(:event, author_id: existing_admin.id) }
   given!(:existing_event2) { create(:event, author_id: existing_user.id) }
 
-  describe 'as admin' do
+  context 'as admin' do
     background { sign_in(existing_admin) }
 
     include_examples 'Delete an event' do
