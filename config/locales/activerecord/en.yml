@@ -14,3 +14,6 @@ en:
       messages:
         required: "Required field"
         blank: "Can't be empty"
+  shared:
+    errors:
+      not_authorized: "You are not authorized to view this page"
