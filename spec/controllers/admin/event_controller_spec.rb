@@ -6,17 +6,17 @@ RSpec.describe Admin::EventsController, type: :controller do
   let(:admin) { create(:user, admin: true) }
   let(:admin2) { create(:user, admin: true) }
 
-  let!(:event) { create(:event, author_id: admin.id) }
+  let!(:existing_event) { create(:event, author_id: admin.id) }
   let(:event2) { create(:event, author_id: admin2.id) }
 
-  let(:delete_event) { delete :destroy, params: { id: event.id } }
+  let(:delete_event) { delete :destroy, params: { id: existing_event.id } }
   let(:delete_event2) { delete :destroy, params: { id: event2.id } }
 
   context 'GET #edit' do
     describe 'author of the event' do
       before do
         login(admin)
-        get :edit, params: { id: event.id }
+        get :edit, params: { id: existing_event.id }
       end
 
       it 'renders edit view' do
@@ -41,24 +41,24 @@ RSpec.describe Admin::EventsController, type: :controller do
 
     context 'Update with valid attributes' do
       it 'changes event attributes' do
-        patch :update, params: { id: event, event: { title: 'new title' } }
-        event.reload
-        expect(event.title).to eq 'new title'
+        patch :update, params: { id: existing_event, event: { title: 'new title' } }
+        existing_event.reload
+        expect(existing_event.title).to eq 'new title'
       end
 
       it 'redirect to updated event' do
-        patch :update, params: { id: event, event: attributes_for(:event) }
+        patch :update, params: { id: existing_event, event: attributes_for(:event) }
 
         expect(response).to redirect_to event_path(Event.last)
       end
     end
 
     context 'Update with invalid attributes' do
-      before { patch :update, params: { id: event, event: attributes_for(:event, :invalid_dates), format: :js } }
+      before { patch :update, params: { id: existing_event, event: attributes_for(:event, :invalid_dates), format: :js } }
 
       it 'does not change event' do
-        event.reload
-        expect(assigns(:event)).not_to eq event.title
+        existing_event.reload
+        expect(assigns(:existing_event)).not_to eq existing_event.title
       end
 
       it 're-renders edit view' do
@@ -73,7 +73,7 @@ RSpec.describe Admin::EventsController, type: :controller do
         before { login(admin) }
 
         it 'successfully delete the event' do
-          event
+          existing_event
           expect { delete_event }.to change(Event, :count).by(-1)
         end
 

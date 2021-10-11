@@ -7,12 +7,12 @@ feature 'User can create an event', '
   to the form page and fill the form
 ' do
   context 'Authenticated user' do
-    given!(:admin) { create(:user, admin: true) }
-    given!(:user) { create(:user) }
+    given!(:existing_admin) { create(:user, admin: true) }
+    given!(:existing_user) { create(:user) }
 
     context 'as admin' do
       background do
-        sign_in(admin)
+        sign_in(existing_admin)
         visit new_event_path
       end
 
@@ -21,7 +21,7 @@ feature 'User can create an event', '
 
     context 'as user' do
       background do
-        sign_in(user)
+        sign_in(existing_user)
         visit new_event_path
       end
 
