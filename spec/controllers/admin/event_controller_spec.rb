@@ -12,126 +12,26 @@ RSpec.describe Admin::EventsController, type: :controller do
   let(:delete_event) { delete :destroy, params: { id: event.id } }
   let(:delete_event2) { delete :destroy, params: { id: event2.id } }
 
-  describe 'GET #index' do
-    let(:events) { create_list(:event, 15, author_id: admin.id) }
-
-    before do
-      login(admin)
-      get :index
-    end
-
-    it 'returns the correct array of events' do
-      expect(events).to match_array(events)
-    end
-
-    it 'renders index view' do
-      expect(response).to render_template :index
-    end
-  end
-
-  describe 'GET #show' do
-    before do
-      login(admin)
-      get :show, params: { id: event.id }
-    end
-
-    it 'renders show view' do
-      expect(response).to render_template :show
-    end
-  end
-
-  describe 'GET #edit' do
-    before do
-      login(admin)
-      get :edit, params: { id: event.id }
-    end
-
-    it 'renders edit view' do
-      expect(response).to render_template :edit
-    end
-  end
-
-  describe 'GET #new' do
-    before do
-      login(admin)
-      get :new
-    end
-
-    it 'assigns a new Event to @event' do
-      expect(assigns(:event)).to be_a_new(Event)
-    end
-
-    it 'renders new view' do
-      expect(response).to render_template :new
-    end
-  end
-
-  describe 'POST #create' do
-    before { login(admin) }
-
-    context 'with valid attributes' do
-      subject { post :create, params: { event: attributes_for(:event) } }
-
-      it 'save a new event' do
-        expect { subject }.to change(Event, :count).by(1)
+  context 'GET #edit' do
+    describe 'author of the event' do
+      before do
+        login(admin)
+        get :edit, params: { id: event.id }
       end
 
-      it 'redirects to show' do
-        subject
-        expect(response).to redirect_to event_path(assigns(:event))
+      it 'renders edit view' do
+        expect(response).to render_template :edit
       end
     end
 
-    context 'with invalid attributes' do
-      before { event }
-
-      subject { post :create, params: { event: attributes_for(:event, :invalid_dates), format: :js } }
-
-      it 'does not save the new event in the database' do
-        expect { subject }.to_not change(Event, :count)
+    describe 'not author of the event' do
+      before do
+        login(admin)
+        get :edit, params: { id: event2.id }
       end
 
-      it 're-renders new view' do
-        subject
-        expect(response).to render_template :new
-      end
-    end
-  end
-
-  describe 'DELETE #destroy' do
-    context 'If event belongs to the user' do
-      before { login(admin) }
-
-      it 'successfully delete the event' do
-        event
-        expect { delete_event }.to change(Event, :count).by(-1)
-      end
-
-      it 'successfully redirects to index' do
-        delete_event
-        expect(response).to redirect_to events_path
-      end
-    end
-
-    context 'If event does not belong to the user' do
-      context 'authenticated user' do
-        before { login(admin) }
-
-        it 'con not delete another event' do
-          event2
-          expect { delete_event2 }.to_not change(Event, :count)
-        end
-      end
-
-      context 'not authenticated user' do
-        it 'con not delete question' do
-          expect { delete_event }.to_not change(Event, :count)
-        end
-
-        it 'redirects to login page' do
-          delete_event
-          expect(response).to redirect_to root_path
-        end
+      it 'renders edit view' do
+        expect(response).to render_template :edit
       end
     end
   end
@@ -163,6 +63,44 @@ RSpec.describe Admin::EventsController, type: :controller do
 
       it 're-renders edit view' do
         expect(response).to render_template(:edit)
+      end
+    end
+  end
+
+  describe 'DELETE #destroy' do
+    context 'authenticated user' do
+      context 'deletes his event' do
+        before { login(admin) }
+
+        it 'successfully delete the event' do
+          event
+          expect { delete_event }.to change(Event, :count).by(-1)
+        end
+
+        it 'successfully redirects to index' do
+          delete_event
+          expect(response).to redirect_to events_path
+        end
+      end
+
+      context 'deletes not his event' do
+        before { login(admin) }
+
+        it 'successfully delete the event' do
+          event2
+          expect { delete_event2 }.to change(Event, :count).by(-1)
+        end
+      end
+    end
+
+    context 'not authenticated user' do
+      it 'con not delete question' do
+        expect { delete_event }.to_not change(Event, :count)
+      end
+
+      it 'redirects to login page' do
+        delete_event
+        expect(response).to redirect_to root_path
       end
     end
   end

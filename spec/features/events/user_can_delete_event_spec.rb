@@ -10,19 +10,33 @@ feature 'User can delete an event', '
   given!(:user) { create(:user) }
 
   given!(:event) { create(:event, author_id: admin.id) }
+  given!(:event2) { create(:event, author_id: user.id) }
 
-  context 'Authenticated user can delete event' do
-    describe 'as admin' do
-      background do
-        sign_in(admin)
-        visit event_path(event)
+  describe 'as admin' do
+    background { sign_in(admin) }
+
+    it_behaves_like 'Delete an event'
+
+    context 'can delete not his event' do
+      it_behaves_like 'Delete an event' do
+        let(:event) { event2 }
       end
+    end
+  end
 
-      scenario 'can delete his own event' do
-        click_on t('.admin.events.show.button.delete')
+  describe 'as user' do
+    background { sign_in(user) }
 
-        expect(page).to have_content t('.admin.events.destroy.success')
-      end
+    it_behaves_like 'Delete an event' do
+      let(:event) { event2 }
+    end
+
+    scenario 'can not delete not his own event' do
+      visit event_path(event)
+
+      click_on t('.admin.events.show.button.delete')
+
+      expect(page).to_not have_content t('.admin.events.destroy.success')
     end
   end
 end

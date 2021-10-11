@@ -7,27 +7,31 @@ feature 'User can edit an event', '
   to the show page and fill form
 ' do
   given!(:admin) { create(:user, admin: true) }
+  given!(:admin2) { create(:user, admin: true) }
+
   given!(:event) { create(:event, author_id: admin.id) }
+  given!(:event2) { create(:event, author_id: admin2.id) }
 
-  context 'Authenticated user can edit event' do
+  context 'Authenticated user' do
     describe 'as admin' do
-      background do
-        sign_in(admin)
-        visit event_path(event)
-        click_on 'Edit Event'
-      end
+      background { sign_in(admin) }
 
-      scenario 'form with valid attributes' do
-        title = 'title title'
-
-        within '.edit_event' do
-          fill_in 'Title', with: title
-
-          click_on t('helpers.submit.admin.event.update')
+      describe 'can edit his own event' do
+        before do
+          visit event_path(event)
+          click_on 'Edit Event'
         end
 
-        expect(page).to have_content t('.admin.events.update.success')
-        expect(page).to have_content title
+        it_behaves_like 'Update en event by form'
+      end
+
+      describe 'can edit not his own event' do
+        before do
+          visit event_path(event2)
+          click_on 'Edit Event'
+        end
+
+        it_behaves_like 'Update en event by form'
       end
     end
   end

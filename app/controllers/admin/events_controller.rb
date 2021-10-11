@@ -4,32 +4,8 @@
 module Admin
   # EventsController for Admin namespace
   class EventsController < Admin::BaseController
-    before_action :authenticate_user!, except: %i[index show]
-    before_action :find_event, only: %i[edit update show destroy]
-
-    def index
-      @events = Event.page params[:page]
-    end
-
-    def show; end
-
-    def new
-      authorize Event
-
-      @event = Event.new
-    end
-
-    def create
-      authorize Event
-
-      @event = Event.new(event_params.merge(author_id: current_user.id))
-
-      if @event.save
-        redirect_to event_path(@event), notice: t('.success')
-      else
-        render :new
-      end
-    end
+    before_action :authenticate_user!
+    before_action :find_event, only: %i[show edit update destroy]
 
     def edit
       authorize @event

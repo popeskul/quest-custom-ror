@@ -3,32 +3,38 @@
 # EventPolicy
 class EventPolicy < ApplicationPolicy
   def new?
-    present?
+    user_present?
   end
 
+  def show?; end
+
   def edit?
-    author? if present?
+    author? or admin? if user_present?
   end
 
   def create?
-    present?
+    user_present?
   end
 
   def destroy?
-    author? if present?
+    author? or admin? if user_present?
   end
 
   def update?
-    author? if present?
+    author? or admin? if user_present?
   end
 
   private
 
-  def present?
+  def user_present?
     user.present?
   end
 
   def author?
     user.id == record.author_id
+  end
+
+  def admin?
+    user.admin
   end
 end
