@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # See https://github.com/heartcombo/simple_form#custom-components to know
 # Dir[Rails.root.join('lib/components/**/*.rb')].each { |f| require f }
 

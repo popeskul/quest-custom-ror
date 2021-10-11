@@ -1,9 +1,8 @@
 en:
   helpers:
     submit:
-      admin:
-        event:
-          create: "Create Event"
-          update: "Update Event"
-          edit: "Edit Event"
-          delete: "Delete Event"
+      event:
+        create: "Create Event"
+        update: "Update Event"
+        edit: "Edit Event"
+        delete: "Delete Event"

@@ -1,31 +1,37 @@
-# frozen_string_literal: true
-
 require 'rails_helper'
 
 feature 'User can create an event', '
   In order to create an event, user need to go
   to the form page and fill the form
 ' do
-  context 'Authenticated user' do
-    given!(:existing_admin) { create(:user, admin: true) }
-    given!(:existing_user) { create(:user) }
+  describe 'User can create form' do
+    background { visit new_event_path }
 
-    context 'as admin' do
-      background do
-        sign_in(existing_admin)
-        visit new_event_path
+    scenario 'form with valid attributes' do
+      title = 'title title'
+
+      within '.new_event' do
+        fill_in t('.simple_form.labels.event.title'), with: title
+        fill_in t('.simple_form.labels.event.location'), with: 'location location'
+        fill_in t('.simple_form.labels.event.organizer_email'), with: 'email@mail.com'
+
+        within '.event_start_time' do
+          have_select 'event_start_time_1i', selected: '2021'
+          have_select 'event_start_time_2i', selected: 'September'
+          have_select 'event_start_time_3i', selected: '1'
+        end
+
+        within '.event_end_time' do
+          have_select '#event_end_time_1i', selected: '2022'
+          have_select '#event_end_time_2i', selected: 'September'
+          have_select '#event_end_time_3i', selected: '1'
+        end
+
+        click_on t('helpers.submit.event.create')
       end
 
-      include_examples 'Create an event'
-    end
-
-    context 'as user' do
-      background do
-        sign_in(existing_user)
-        visit new_event_path
-      end
-
-      include_examples 'Create an event'
+      expect(page).to have_content t('.events.create.success')
+      expect(page).to have_content title
     end
   end
 end

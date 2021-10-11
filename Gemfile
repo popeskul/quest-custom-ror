@@ -1,16 +1,12 @@
-# frozen_string_literal: true
-
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.3'
 
-gem 'devise'
 gem 'jbuilder', '~> 2.7'
 gem 'kaminari'
 gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
-gem 'pundit'
 gem 'rails', '~> 6.1.4'
 gem 'sass-rails', '>= 6'
 gem 'simple_form'
@@ -27,11 +23,8 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'factory_bot_rails'
   gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'master'
-  gem 'launchy'
-  gem 'pundit-matchers'
   gem 'rails-controller-testing'
   gem 'rspec-rails', '~> 5.0.0'
-  gem 'rubocop', require: false
 end
 
 group :development do
@@ -43,6 +36,7 @@ end
 
 group :test do
   gem 'capybara', '>= 3.26'
+  gem 'launchy'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers', '~> 5.0'
   gem 'simplecov', require: false

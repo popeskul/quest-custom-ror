@@ -1,10 +1,7 @@
-# frozen_string_literal: true
-
 require 'faker'
 
 FactoryBot.define do
   factory :event do
-    association :author, factory: :user
     title                              { Faker::Name.name }
     description                        { Faker::Lorem.sentence }
     location                           { Faker::Address.full_address }
@@ -13,10 +10,10 @@ FactoryBot.define do
     link                               { Faker::Internet.url }
     sequence(:start_time)        { |n| DateTime.new(2000 + n, 10, 1) }
     sequence(:end_time)          { |n| DateTime.new(2000 + (n + 1), 10, 1) }
+  end
 
-    trait :invalid_dates do
-      sequence(:start_time)        { |n| DateTime.new(2000 + (n + 1), 10, 1) }
-      sequence(:end_time)          { |n| DateTime.new(2000 + n, 10, 1) }
-    end
+  trait :invalid_dates do
+    sequence(:start_time)        { |n| DateTime.new(2000 + (n + 1), 10, 1) }
+    sequence(:end_time)          { |n| DateTime.new(2000 + n, 10, 1) }
   end
 end

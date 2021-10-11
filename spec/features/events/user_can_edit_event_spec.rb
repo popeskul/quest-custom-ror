@@ -1,38 +1,28 @@
-# frozen_string_literal: true
-
 require 'rails_helper'
 
 feature 'User can edit an event', '
   In order to update an event, user need to go
   to the show page and fill form
 ' do
-  given!(:existing_admin) { create(:user, admin: true) }
-  given!(:existing_admin2) { create(:user, admin: true) }
+  given!(:event) { create(:event) }
 
-  given!(:existing_event) { create(:event, author_id: existing_admin.id) }
-  given!(:existing_event2) { create(:event, author_id: existing_admin2.id) }
+  describe 'User can edit event' do
+    background do
+      visit event_path(event)
+      click_on 'Edit Event'
+    end
 
-  context 'Authenticated user' do
-    describe 'as admin' do
-      background { sign_in(existing_admin) }
+    scenario 'form with valid attributes' do
+      title = 'title title'
 
-      describe 'can edit his own event' do
-        before do
-          visit event_path(existing_event)
-          click_on 'Edit Event'
-        end
+      within '.edit_event' do
+        fill_in 'Title', with: title
 
-        it_behaves_like 'Update en event by form'
+        click_on t('helpers.submit.event.update')
       end
 
-      describe 'can edit not his own event' do
-        before do
-          visit event_path(existing_event2)
-          click_on 'Edit Event'
-        end
-
-        it_behaves_like 'Update en event by form'
-      end
+      expect(page).to have_content t('.events.update.success')
+      expect(page).to have_content title
     end
   end
 end
