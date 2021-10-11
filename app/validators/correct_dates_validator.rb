@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
+# Validator for correct date
 class CorrectDatesValidator < ActiveModel::EachValidator
-  def validate_each(record, attribute, value)
+  def validate_each(record, attribute, _value)
     record.errors.add(attribute, I18n.t('.invalid_date')) unless valid_date?(record)
   end
 

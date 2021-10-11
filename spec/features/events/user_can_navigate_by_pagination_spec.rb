@@ -1,13 +1,17 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 feature 'User can navigate events', '
   In order to view events, user can navigate
   by pagination
 ' do
-  given(:create_events) { create_list(:event, 15) }
+  given!(:existing_user) { create(:user) }
+  given(:create_events) { create_list(:event, 15, author_id: existing_user.id) }
 
-  describe 'User can navigate events' do
+  describe 'Authenticated user can navigate events' do
     before do
+      sign_in(existing_user)
       create_events
       visit events_path
     end

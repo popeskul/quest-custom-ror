@@ -1,6 +1,6 @@
-= link_to t('.button.create'), new_event_path, class: 'btn btn-primary mb-3'
-
 ul.events.list-group.mb-3
   = render @events
 
 = paginate @events
+
+= link_to t('.button.create'), new_event_path, class: 'btn btn-primary'

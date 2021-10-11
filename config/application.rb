@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative "boot"
 
 require "rails/all"
@@ -7,6 +9,7 @@ require "rails/all"
 Bundler.require(*Rails.groups)
 
 module QuestCustomRor
+  # Adding config
   class Application < Rails::Application
     config.load_defaults 6.1
     config.i18n.default_locale = :en
