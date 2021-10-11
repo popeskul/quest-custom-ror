@@ -4,7 +4,6 @@
 module Admin
   # EventsController for Admin namespace
   class EventsController < Admin::BaseController
-    before_action :authenticate_user!
     before_action :find_event, only: %i[show edit update destroy]
 
     def edit
