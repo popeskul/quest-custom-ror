@@ -9,9 +9,6 @@ RSpec.describe Admin::ModerationEventsController, type: :controller do
   let!(:existing_events) { create_list(:event, 2, author_id: user_adam.id) }
   let!(:existing_event2) { create(:event, author_id: user_eva.id) }
 
-  let(:delete_event) { delete :destroy, params: { id: existing_events[0].id } }
-  let(:delete_event2) { delete :destroy, params: { id: existing_event2.id } }
-
   context 'GET #index' do
     before do
       login(user_adam)

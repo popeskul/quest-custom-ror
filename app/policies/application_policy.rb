@@ -48,6 +48,6 @@ class ApplicationPolicy
   end
 
   def admin?
-    user.admin
+    user.admin if user_present?
   end
 end

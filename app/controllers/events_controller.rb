@@ -3,10 +3,11 @@
 # Controller for events
 class EventsController < ApplicationController
   before_action :authenticate_user!, only: %i[new create]
-  before_action :find_events, only: %i[index]
   before_action :find_event, only: %i[show edit update destroy]
 
-  def index; end
+  def index
+    @events = Event.approved.page(params[:page])
+  end
 
   def show; end
 
@@ -50,10 +51,6 @@ class EventsController < ApplicationController
   end
 
   private
-
-  def find_events
-    @events = Event.where(aasm_state: 'approved').page(params[:page])
-  end
 
   def find_event
     @event = Event.find(params[:id])

@@ -5,15 +5,15 @@ module Admin
   # ModerationEvent policy
   class ModerationEventPolicy < ApplicationPolicy
     def index?
-      admin? if user_present?
+      admin?
     end
 
     def approve?
-      admin? if user_present?
+      admin?
     end
 
     def decline?
-      admin? if user_present?
+      admin?
     end
   end
 end
