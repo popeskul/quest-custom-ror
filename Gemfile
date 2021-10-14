@@ -6,7 +6,6 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.7.3'
 
 gem 'aasm'
-gem 'after_commit_everywhere', '~> 1.0'
 gem 'devise'
 gem 'jbuilder', '~> 2.7'
 gem 'kaminari'
