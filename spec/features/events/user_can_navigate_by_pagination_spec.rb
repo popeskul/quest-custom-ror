@@ -7,7 +7,7 @@ feature 'User can navigate events', '
   by pagination
 ' do
   given!(:existing_user) { create(:user) }
-  given(:create_events) { create_list(:event, 20, author_id: existing_user.id) }
+  given(:create_events) { create_list(:event, 20, :approved, author_id: existing_user.id) }
 
   describe 'Authenticated user can navigate events' do
     before do

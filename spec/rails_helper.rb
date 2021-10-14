@@ -31,7 +31,7 @@ RSpec.configure do |config|
 
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
-  config.use_transactional_fixtures = true
+  # config.use_transactional_fixtures = true
 
   Capybara.javascript_driver = :selenium_chrome_headless
 
@@ -41,6 +41,32 @@ RSpec.configure do |config|
 
   config.after(:all) do
     FileUtils.rm_rf("#{Rails.root}/tmp/storage")
+  end
+
+  config.use_transactional_fixtures = false
+
+  config.before(:suite) do
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.strategy = :transaction
+  end
+
+  config.before(:each, type: :feature) do
+    driver_shares_db_connection_with_specs = Capybara.current_driver == :rack_test
+
+    unless driver_shares_db_connection_with_specs
+      DatabaseCleaner.strategy = :truncation
+    end
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+
+  config.append_after(:each) do
+    DatabaseCleaner.clean
   end
 end
 
