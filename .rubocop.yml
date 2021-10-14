@@ -3,6 +3,7 @@ AllCops:
     - bin/**/*
     - config/**/*
     - db/**/*
+    - spec/rails_helper.rb
 
 Metrics/BlockLength:
   IgnoredMethods: ['describe', 'context', 'shared_examples_for', 'shared_examples', 'feature', 'shared_context']
