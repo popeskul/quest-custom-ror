@@ -5,8 +5,15 @@ Rails.application.routes.draw do
 
   root to: 'events#index'
 
-  namespace :admin do
+  namespace :admin, shallow: true do
     resources :events
+
+    resources :moderation_events do
+      member do
+        post :decline
+        post :approve
+      end
+    end
   end
 
   resources :events

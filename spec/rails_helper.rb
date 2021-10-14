@@ -3,6 +3,7 @@
 require 'spec_helper'
 require 'simplecov'
 require 'pundit/rspec'
+require 'aasm/rspec'
 
 SimpleCov.start
 

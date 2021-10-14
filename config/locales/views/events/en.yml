@@ -3,6 +3,7 @@ en:
     index:
       button:
         create: 'Create Event'
+        moderate: 'Moderate events'
     create:
       success: 'Your event successfully created.'
     update:
@@ -13,6 +14,7 @@ en:
       button:
         edit: 'Edit Event'
         delete: 'Delete event'
+      status-is: "status - %{status}"
   admin:
     events:
       show:
@@ -25,3 +27,11 @@ en:
         success: 'Your event successfully updated.'
       destroy:
         success: 'Event was successfully deleted.'
+      event:
+        approve: 'approve'
+        decline: 'decline'
+    moderation_events:
+      approve:
+        approved: 'Event was successfully approved'
+      decline:
+        declined: 'Event was successfully declined'

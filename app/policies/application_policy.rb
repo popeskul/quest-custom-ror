@@ -36,4 +36,18 @@ class ApplicationPolicy
   def destroy?
     false
   end
+
+  private
+
+  def user_present?
+    user.present?
+  end
+
+  def author?
+    user.id == record.author_id
+  end
+
+  def admin?
+    user.admin
+  end
 end

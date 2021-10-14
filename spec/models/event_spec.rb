@@ -24,4 +24,20 @@ RSpec.describe Event, type: :model do
       it { should_not allow_value('').for(:end_time) }
     end
   end
+
+  describe 'State machine' do
+    let(:event) { Event.new }
+
+    it { expect(event).to have_state(:pending) }
+
+    describe 'move to approve' do
+      it { expect(event).to transition_from(:pending).to(:approved).on_event(:approve) }
+      it { expect(event).to transition_from(:declined).to(:approved).on_event(:approve) }
+    end
+
+    describe 'move to decline' do
+      it { expect(event).to transition_from(:approved).to(:declined).on_event(:decline) }
+      it { expect(event).to transition_from(:pending).to(:declined).on_event(:decline) }
+    end
+  end
 end

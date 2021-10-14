@@ -52,7 +52,7 @@ class EventsController < ApplicationController
   private
 
   def find_events
-    @events = Event.page(params[:page])
+    @events = Event.where(aasm_state: 'approved').page(params[:page])
   end
 
   def find_event

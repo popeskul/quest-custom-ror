@@ -7,7 +7,7 @@ feature 'User can navigate events', '
   by pagination
 ' do
   given!(:existing_user) { create(:user) }
-  given(:create_events) { create_list(:event, 15, author_id: existing_user.id) }
+  given(:create_events) { create_list(:event, 15, author_id: existing_user.id, aasm_state: 'approved') }
 
   describe 'Authenticated user can navigate events' do
     before do
@@ -16,13 +16,13 @@ feature 'User can navigate events', '
       visit events_path
     end
 
-    it 'User can view first page' do
+    it 'User can view first approved page' do
       within '.events' do
         expect(page).to have_selector('.event', count: 10)
       end
     end
 
-    it 'User can move to the second page' do
+    it 'User can move to the second approved page' do
       within('.pagination') { click_link '2' }
 
       expect(page).to have_selector('.event', count: 5)
