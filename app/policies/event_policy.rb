@@ -23,18 +23,4 @@ class EventPolicy < ApplicationPolicy
   def update?
     author? or admin? if user_present?
   end
-
-  private
-
-  def user_present?
-    user.present?
-  end
-
-  def author?
-    user.id == record.author_id
-  end
-
-  def admin?
-    user.admin
-  end
 end

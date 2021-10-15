@@ -1,5 +1,7 @@
 p = @event.title
 
+p = t('.status-is', status: @event.aasm_state)
+
 .mb-3
   = link_to t('.button.edit'), edit_event_path(@event), class: 'btn btn-outline-primary'
 

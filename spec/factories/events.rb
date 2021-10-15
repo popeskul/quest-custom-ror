@@ -18,5 +18,9 @@ FactoryBot.define do
       sequence(:start_time)        { |n| DateTime.new(2000 + (n + 1), 10, 1) }
       sequence(:end_time)          { |n| DateTime.new(2000 + n, 10, 1) }
     end
+
+    trait :approved do
+      aasm_state { 'approved' }
+    end
   end
 end
