@@ -35,3 +35,8 @@ en:
         approved: 'Event was successfully approved'
       decline:
         declined: 'Event was successfully declined'
+
+  notification_mailer:
+    event_created:
+      subject: "Event created"
+      title_new: "Title"

@@ -12,10 +12,12 @@ module Services
 
     def approve
       @event.approve!
+      NotificationMailer.event_created(@event.author, @event).deliver
     end
 
     def decline
       @event.decline!
+      NotificationMailer.event_created(@event.author, @event).deliver
     end
   end
 end
