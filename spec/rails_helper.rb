@@ -4,6 +4,9 @@ require 'spec_helper'
 require 'simplecov'
 require 'pundit/rspec'
 require 'aasm/rspec'
+require 'sidekiq/testing'
+
+Sidekiq::Testing.inline!
 
 SimpleCov.start
 
