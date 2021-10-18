@@ -15,7 +15,7 @@ RSpec.describe Services::Event do
 
     it 'user can not approve twice' do
       subject.approve
-      expect { subject.approve }.to raise_exception AASM::InvalidTransition
+      expect(subject.approve).to eq false
     end
   end
 
@@ -26,7 +26,7 @@ RSpec.describe Services::Event do
 
     it 'user can not decline twice' do
       subject.decline
-      expect { subject.decline }.to raise_exception AASM::InvalidTransition
+      expect(subject.decline).to eq false
     end
   end
 end

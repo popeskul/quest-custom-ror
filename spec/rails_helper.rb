@@ -28,10 +28,9 @@ RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include ControllerHelpers, type: :controller
   config.include FeatureHelpers, type: :feature
+  config.include MailerHelpers, type: :mailer
 
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
-
-  # config.use_transactional_fixtures = true
 
   Capybara.javascript_driver = :selenium_chrome_headless
 

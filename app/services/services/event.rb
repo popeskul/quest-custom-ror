@@ -2,7 +2,7 @@
 
 # Event service
 module Services
-  # implement Reputation
+  # implement Event Services
   class Event
     attr_reader :event
 
@@ -11,13 +11,15 @@ module Services
     end
 
     def approve
+      return false if @event.approved?
+
       @event.approve!
-      NotificationMailer.event_created(@event.author, @event).deliver
     end
 
     def decline
+      return false if @event.declined?
+
       @event.decline!
-      NotificationMailer.event_created(@event.author, @event).deliver
     end
   end
 end

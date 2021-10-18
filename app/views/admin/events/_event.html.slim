@@ -1,15 +1,18 @@
-li.event.list-group-item
+li.event.list-group-item.d-flex.justify-content-between
   = link_to event.title, event, class: 'btn btn-link'
 
-  = button_to t('.approve'),
-          approve_admin_moderation_event_path(event),
-          class: 'btn btn-link',
-          method: :post,
-          remote: true
-          / disabled: event.decline?,
-  = button_to t('.decline'),
-          decline_admin_moderation_event_path(event),
-          class: 'btn btn-link',
-          method: :post,
-          remote: true
-          / disabled: event.approve?,
+  .btn-group role="group"
+    - if event.approved?
+      = button_to t('.decline'),
+              decline_admin_moderation_event_path(event),
+              class: 'btn btn-danger ms-2',
+              method: :post,
+              remote: true,
+              disabled: event.declined?
+    - else
+      = button_to t('.approve'),
+              approve_admin_moderation_event_path(event),
+              class: 'btn btn-success ms-2',
+              method: :post,
+              remote: true,
+              disabled: event.approved?

@@ -1,3 +1,5 @@
 h1 = t('.title_new')
 
+p = t('.description', user: @user.email)
+
 h2 = link_to @event.title, url_for(@event)

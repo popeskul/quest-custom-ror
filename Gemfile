@@ -7,6 +7,7 @@ ruby '2.7.3'
 
 gem 'aasm'
 gem 'devise'
+gem 'dry-monads', '~> 1.4'
 gem 'jbuilder', '~> 2.7'
 gem 'kaminari'
 gem 'mailgun-ruby', '~>1.2.5'
@@ -34,6 +35,7 @@ group :development, :test do
   gem 'launchy'
   gem 'pundit-matchers'
   gem 'rails-controller-testing'
+  gem 'rspec-mocks'
   gem 'rspec-rails', '~> 5.0.0'
   gem 'rubocop', require: false
 end
