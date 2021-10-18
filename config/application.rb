@@ -18,12 +18,5 @@ module QuestCustomRor
     config.active_job.queue_adapter = :sidekiq
 
     config.action_mailer.perform_deliveries = true
-
-    config.action_mailer.delivery_method = :mailgun
-
-    config.action_mailer.mailgun_settings = {
-      api_key: Rails.application.credentials.config[:mailgun][:api_key],
-      domain: Rails.application.credentials.config[:mailgun][:domain],
-    }
   end
 end
