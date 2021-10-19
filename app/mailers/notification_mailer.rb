@@ -2,7 +2,7 @@
 
 # Mailer for Notification
 class NotificationMailer < ApplicationMailer
-  default from: 'me@qustom-ror.org'
+  default from: Settings.mail.from
 
   def event_created(admin, event)
     @event = event

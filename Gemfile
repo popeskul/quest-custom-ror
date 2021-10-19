@@ -6,6 +6,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.7.3'
 
 gem 'aasm'
+gem 'config'
 gem 'devise'
 gem 'dry-monads', '~> 1.4'
 gem 'jbuilder', '~> 2.7'

@@ -24,7 +24,7 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = 'no-reply@quest-ror.com'
+  config.mailer_sender = Settings.mail.sender
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
@@ -45,7 +45,7 @@ Devise.setup do |config|
   # parameters are used only when authenticating and not when retrieving from
   # session. If you need permissions, you should implement that in a before filter.
   # You can also supply a hash where the value is a boolean determining whether
-  # or not authentication should be aborted when the value is not present.
+  # or not authentication should be aborted config/initializers/config.rbwhen the value is not present.
   # config.authentication_keys = [:email]
 
   # Configure parameters from the request object used for authentication. Each entry
