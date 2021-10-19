@@ -3,7 +3,7 @@
 # Event service
 module Services
   # implement Event Services
-  class Event
+  class ModerationEvent
     attr_reader :event
 
     def initialize(event)

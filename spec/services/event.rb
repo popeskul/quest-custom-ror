@@ -2,11 +2,11 @@
 
 require 'rails_helper'
 
-RSpec.describe Services::Event do
+RSpec.describe Services::ModerationEvent do
   let!(:existing_user) { create(:user) }
   let(:existing_event) { create(:event, author: existing_user) }
 
-  subject { Services::Event.new(existing_event) }
+  subject { Services::ModerationEvent.new(existing_event) }
 
   describe '#approve' do
     it 'user approve' do
