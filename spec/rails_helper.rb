@@ -8,7 +8,9 @@ require 'sidekiq/testing'
 
 Sidekiq::Testing.inline!
 
-SimpleCov.start
+SimpleCov.start do
+  add_filter 'config/'
+end
 
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../config/environment', __dir__)

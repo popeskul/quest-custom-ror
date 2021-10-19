@@ -14,13 +14,14 @@ class EventsController < ApplicationController
   def new
     authorize Event
 
-    @event = Event.new
+    @event = Services::CreateEvent.new.event
   end
 
   def create
     authorize Event
 
-    @event = current_user.events.new(event_params)
+    event_options = event_params.merge(author: current_user)
+    @event = Services::CreateEvent.new(event_options).call
 
     if @event.save
       redirect_to event_path(@event), notice: t('.success')

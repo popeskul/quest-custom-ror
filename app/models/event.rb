@@ -14,8 +14,6 @@ class Event < ApplicationRecord
 
   validates :start_time, :end_time, presence: true, correct_dates: true
 
-  after_create :send_email
-
   paginates_per 10
 
   aasm do
@@ -30,11 +28,5 @@ class Event < ApplicationRecord
     event :decline do
       transitions from: %i[approved pending], to: :declined
     end
-  end
-
-  private
-
-  def send_email
-    Services::CreatedEventNotification.call(self).deliver
   end
 end
