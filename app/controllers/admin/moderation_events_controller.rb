@@ -8,7 +8,7 @@ module Admin
     before_action :find_event, only: %i[approve decline]
 
     def index
-      @events = Event.where.not(aasm_state: 'approve').order(created_at: :asc).page(params[:page])
+      @events = Event.for_moderation.order(created_at: :asc).page(params[:page])
     end
 
     def approve

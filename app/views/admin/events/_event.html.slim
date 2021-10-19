@@ -7,12 +7,10 @@ li.event.list-group-item.d-flex.justify-content-between
               decline_admin_moderation_event_path(event),
               class: 'btn btn-danger ms-2',
               method: :post,
-              remote: true,
-              disabled: event.declined?
+              remote: true
     - else
       = button_to t('.approve'),
               approve_admin_moderation_event_path(event),
               class: 'btn btn-success ms-2',
               method: :post,
-              remote: true,
-              disabled: event.approved?
+              remote: true

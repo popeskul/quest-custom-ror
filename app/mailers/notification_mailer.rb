@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'mailgun-ruby'
-
 # Mailer for Notification
 class NotificationMailer < ApplicationMailer
   default from: 'me@qustom-ror.org'
