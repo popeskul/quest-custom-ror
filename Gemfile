@@ -6,14 +6,18 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.7.3'
 
 gem 'aasm'
+gem 'config'
 gem 'devise'
+gem 'dry-monads', '~> 1.4'
 gem 'jbuilder', '~> 2.7'
 gem 'kaminari'
+gem 'mailgun-ruby', '~>1.2.5'
 gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
 gem 'pundit'
 gem 'rails', '~> 6.1.4'
 gem 'sass-rails', '>= 6'
+gem 'sidekiq'
 gem 'simple_form'
 gem 'slim-rails'
 gem 'travis'
@@ -32,6 +36,7 @@ group :development, :test do
   gem 'launchy'
   gem 'pundit-matchers'
   gem 'rails-controller-testing'
+  gem 'rspec-mocks'
   gem 'rspec-rails', '~> 5.0.0'
   gem 'rubocop', require: false
 end

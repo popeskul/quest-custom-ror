@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
+# Event model
 class Event < ApplicationRecord
   include AASM
+
+  scope :for_moderation, -> { where.not(aasm_state: 'approve') }
 
   belongs_to :author, class_name: 'User', foreign_key: 'author_id'
 

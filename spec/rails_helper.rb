@@ -4,8 +4,13 @@ require 'spec_helper'
 require 'simplecov'
 require 'pundit/rspec'
 require 'aasm/rspec'
+require 'sidekiq/testing'
 
-SimpleCov.start
+Sidekiq::Testing.inline!
+
+SimpleCov.start do
+  add_filter 'config/'
+end
 
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../config/environment', __dir__)
@@ -28,10 +33,9 @@ RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include ControllerHelpers, type: :controller
   config.include FeatureHelpers, type: :feature
+  config.include MailerHelpers, type: :mailer
 
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
-
-  # config.use_transactional_fixtures = true
 
   Capybara.javascript_driver = :selenium_chrome_headless
 

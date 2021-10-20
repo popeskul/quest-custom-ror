@@ -8,15 +8,23 @@ module Admin
     before_action :find_event, only: %i[approve decline]
 
     def index
-      @events = Event.where.not(aasm_state: 'approve').page(params[:page])
+      @events = Event.for_moderation.order(created_at: :asc).page(params[:page])
     end
 
     def approve
-      redirect_to admin_moderation_events_path, notice: t('.approved') if Services::Event.new(@event).approve
+      if Services::ModerationEvent.new(@event).approve
+        redirect_to admin_moderation_events_path, notice: t('.success')
+      else
+        redirect_to admin_moderation_events_path, flash: { danger: t('.failure') }
+      end
     end
 
     def decline
-      redirect_to admin_moderation_events_path, notice: t('.declined') if Services::Event.new(@event).decline
+      if Services::ModerationEvent.new(@event).decline
+        redirect_to admin_moderation_events_path, notice: t('.success')
+      else
+        redirect_to admin_moderation_events_path, flash: { danger: t('.failure') }
+      end
     end
 
     private

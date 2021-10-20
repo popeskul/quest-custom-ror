@@ -14,5 +14,9 @@ module QuestCustomRor
     config.load_defaults 6.1
     config.i18n.default_locale = :en
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
+
+    config.active_job.queue_adapter = :sidekiq
+
+    config.action_mailer.perform_deliveries = true
   end
 end

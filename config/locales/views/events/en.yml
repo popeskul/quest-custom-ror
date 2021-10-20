@@ -32,6 +32,14 @@ en:
         decline: 'decline'
     moderation_events:
       approve:
-        approved: 'Event was successfully approved'
+        success: 'Event was successfully approved'
+        failure: 'Event was not approved'
       decline:
-        declined: 'Event was successfully declined'
+        success: 'Event was successfully declined'
+        failure: 'Event was not declined'
+
+  notification_mailer:
+    event_created:
+      subject: "Event created"
+      title_new: "Event created"
+      description: "%{user} created an event. Please approve or decline this event"

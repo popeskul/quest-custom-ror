@@ -2,8 +2,8 @@
 
 # Event service
 module Services
-  # implement Reputation
-  class Event
+  # implement Event Services
+  class ModerationEvent
     attr_reader :event
 
     def initialize(event)
@@ -11,10 +11,14 @@ module Services
     end
 
     def approve
+      return false if @event.approved?
+
       @event.approve!
     end
 
     def decline
+      return false if @event.declined?
+
       @event.decline!
     end
   end

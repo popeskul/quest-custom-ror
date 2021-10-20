@@ -6,4 +6,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :events, class_name: 'Event', foreign_key: 'author_id', dependent: :destroy
+
+  scope :for_admin, -> { where(admin: true) }
 end
