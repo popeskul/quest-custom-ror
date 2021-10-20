@@ -8,6 +8,7 @@ RSpec.describe Admin::ModerationEventsController, type: :controller do
 
   let!(:existing_events) { create_list(:event, 2, author_id: user_adam.id) }
   let!(:existing_event2) { create(:event, author_id: user_eva.id) }
+  let!(:declined_event)  { create(:event, :declined, author_id: user_eva.id) }
 
   let(:approve_event2) { patch :approve, params: { id: existing_event2.id } }
   let(:decline_event2) { patch :decline, params: { id: existing_event2.id } }
@@ -66,10 +67,10 @@ RSpec.describe Admin::ModerationEventsController, type: :controller do
     end
 
     context 'previously declined' do
-      before { existing_event2.decline! }
+      before { declined_event }
 
       it 'user can not approve a twice' do
-        decline_event2
+        patch :decline, params: { id: declined_event.id }
 
         expect(response).to redirect_to admin_moderation_events_path
         expect(flash[:danger]).to eq t('admin.moderation_events.decline.failure')

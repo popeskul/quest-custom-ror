@@ -14,7 +14,7 @@ class EventsController < ApplicationController
   def new
     authorize Event
 
-    @event = Services::CreateEvent.new.event
+    @event = Event.new
   end
 
   def create

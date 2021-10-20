@@ -22,5 +22,9 @@ FactoryBot.define do
     trait :approved do
       aasm_state { 'approved' }
     end
+
+    trait :declined do
+      aasm_state { 'declined' }
+    end
   end
 end

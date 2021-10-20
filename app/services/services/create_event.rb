@@ -11,8 +11,10 @@ module Services
     end
 
     def call
-      @event.save
-      send_email
+      @event.save.tap do |_|
+        send_email
+      end
+
       @event
     end
 
