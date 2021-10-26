@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe Event, type: :model do
   describe 'Relations' do
-    it { should belong_to(:author) }
+    it { should belong_to(:event_postable) }
   end
 
   describe 'Validations' do

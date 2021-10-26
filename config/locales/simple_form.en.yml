@@ -2,6 +2,9 @@ en:
   simple_form:
     labels:
       admin:
+        staffs:
+          new:
+            email: 'Email'
         event:
           title: 'Title'
           description: 'Description'

@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe Services::ModerationEvent do
   let!(:existing_user) { create(:user) }
-  let(:existing_event) { create(:event, author: existing_user) }
+  let(:existing_event) { create(:event, event_postable: existing_user) }
 
   subject { Services::ModerationEvent.new(existing_event) }
 

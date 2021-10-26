@@ -1,0 +1,7 @@
+div
+  = link_to t('.create'), new_admin_staff_path, class: 'btn btn-outline-primary mb-3'
+
+ul.events.list-group.mb-3
+  = render @staffs
+
+= paginate @staffs

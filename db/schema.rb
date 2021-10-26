@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_12_080424) do
+ActiveRecord::Schema.define(version: 2021_10_24_103926) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,7 +28,26 @@ ActiveRecord::Schema.define(version: 2021_10_12_080424) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "author_id"
     t.string "aasm_state", default: "pending", null: false
+    t.string "event_postable_type"
+    t.bigint "event_postable_id"
     t.index ["author_id"], name: "index_events_on_author_id"
+    t.index ["event_postable_type", "event_postable_id"], name: "index_events_on_event_postable"
+  end
+
+  create_table "staffs", force: :cascade do |t|
+    t.string "email", null: false
+    t.string "encrypted_password", null: false
+    t.string "role", default: "admin", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer "failed_attempts", default: 0, null: false
+    t.string "unlock_token"
+    t.datetime "locked_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_staffs_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_staffs_on_reset_password_token", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -39,7 +58,6 @@ ActiveRecord::Schema.define(version: 2021_10_12_080424) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.boolean "admin", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

@@ -1,7 +1,4 @@
 en:
-  invalid_email: 'invalid email'
-  invalid_date: 'must be a valid date'
-
   activerecord:
     models:
       event: "Event"
@@ -14,6 +11,3 @@ en:
       messages:
         required: "Required field"
         blank: "Can't be empty"
-  shared:
-    errors:
-      not_authorized: "You are not authorized to view this page"

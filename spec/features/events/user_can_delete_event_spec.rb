@@ -6,11 +6,11 @@ feature 'User can delete an event', '
   In order to delete an event, user need to go
   to the show page and press delete button
 ' do
-  given!(:existing_admin) { create(:user, admin: true) }
+  given!(:existing_admin) { create(:staff) }
   given!(:existing_user) { create(:user) }
 
-  given!(:existing_event) { create(:event, author_id: existing_admin.id) }
-  given!(:existing_event2) { create(:event, author_id: existing_user.id) }
+  given!(:existing_event) { create(:event, event_postable: existing_admin) }
+  given!(:existing_event2) { create(:event, event_postable: existing_user) }
 
   context 'as admin' do
     background { sign_in(existing_admin) }

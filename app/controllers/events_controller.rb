@@ -2,8 +2,11 @@
 
 # Controller for events
 class EventsController < ApplicationController
-  before_action :authenticate_user!, only: %i[new create]
+  include EventsHelper
+
+  before_action :authenticate_app_current_user!, only: %i[new create edit update destroy]
   before_action :find_event, only: %i[show edit update destroy]
+  before_action :check_event_policy, only: %i[new create edit update destroy]
 
   def index
     @events = Event.approved.page(params[:page])
@@ -12,16 +15,11 @@ class EventsController < ApplicationController
   def show; end
 
   def new
-    authorize Event
-
     @event = Event.new
   end
 
   def create
-    authorize Event
-
-    event_options = event_params.merge(author: current_user)
-    @event = Services::CreateEvent.new(event_options).call
+    @event = Services::CreateEvent.new(app_current_user, event_params).call
 
     if @event.save
       redirect_to event_path(@event), notice: t('.success')
@@ -30,13 +28,9 @@ class EventsController < ApplicationController
     end
   end
 
-  def edit
-    authorize @event
-  end
+  def edit; end
 
   def update
-    authorize @event
-
     if @event.update(event_params)
       redirect_to event_path(@event), notice: t('.success')
     else
@@ -45,8 +39,6 @@ class EventsController < ApplicationController
   end
 
   def destroy
-    authorize @event
-
     @event.destroy
     redirect_to events_path, notice: t('.success')
   end
@@ -60,5 +52,9 @@ class EventsController < ApplicationController
   def event_params
     params.require(:event).permit(:title, :description, :location, :organizer_email,
                                   :organizer_telegram, :link, :start_time, :end_time)
+  end
+
+  def check_event_policy
+    check_policy @event, action_name
   end
 end

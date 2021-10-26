@@ -3,10 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe Services::CreatedEventNotification do
-  let(:existing_admin) { create(:user, admin: true) }
-  let(:existing_user) { create(:user) }
-
-  let(:existing_event) { create(:event, author: existing_user) }
+  let(:existing_admin) { create(:staff) }
+  let(:existing_event) { create(:event, event_postable: existing_admin) }
 
   let(:mailer) { double('NotificationMailer') }
   subject { Services::CreatedEventNotification.new.call(existing_event) }

@@ -20,8 +20,8 @@ RSpec.describe Admin::ModerationEventPolicy, type: :policy do
   end
 
   context 'being an authorized as Admin' do
-    let(:user) { create(:user, admin: true) }
-    let(:event) { create(:event, author: user) }
+    let(:user) { create(:staff) }
+    let(:event) { create(:event, event_postable: user) }
 
     it { is_expected.to permit_actions(%i[index approve decline]) }
     it { is_expected.to forbid_actions(%i[destroy new create edit update]) }

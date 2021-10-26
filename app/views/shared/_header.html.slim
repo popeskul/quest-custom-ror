@@ -8,18 +8,27 @@ header
 
       #navbarNav.collapse.navbar-collapse
         ul.navbar-nav.align-items-center.me-auto.mb-2.mb-lg-0
-          li.nav-item.mx-lg-2 = link_to 'all events', root_path, class: 'nav-link text-white'
+          li.nav-item.mx-lg-2 = link_to_unless_current t('.all-events'), root_path, class: 'nav-link'
           - if user_signed_in?
-            li.nav-item.mx-lg-2
-              = current_user.email
-            li.nav-item.mx-lg-2 admin: #{current_user.admin?}
+            li.nav-item.mx-lg-2 = current_user.email
+
+          - if staff_signed_in?
+            li.nav-item.mx-lg-2 = current_staff.email
+            li.nav-item.mx-lg-2 role: #{current_staff.role}
+
         .d-flex
           ul.navbar-nav.align-items-center.me-auto.mb-2.mb-lg-0
             - if user_signed_in?
               li.nav-item
-                = link_to 'Log out', destroy_user_session_path, method: :delete, class: 'nav-link text-white'
-            - else
+                = link_to t('.log-out'), destroy_user_session_path, method: :delete, class: 'nav-link text-white'
+            - if staff_signed_in?
               li.nav-item
-                = link_to 'Enter', new_user_session_path, class: 'nav-link'
+                = link_to t('.log-out'), destroy_staff_session_path, method: :delete, class: 'nav-link text-white'
+
+            - unless signed_in?
               li.nav-item
-                = link_to 'Registration', new_user_registration_path, class: 'nav-link'
+                = link_to_unless_current t('.enter-as', user: 'User'), new_user_session_path, class: 'nav-link'
+              li.nav-item
+                = link_to_unless_current t('.enter-as', user: 'Admin'), new_staff_session_path, class: 'nav-link'
+              li.nav-item
+                = link_to_unless_current t('.registration'), new_user_registration_path, class: 'nav-link'

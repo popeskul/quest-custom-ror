@@ -6,4 +6,7 @@ AllCops:
     - spec/rails_helper.rb
 
 Metrics/BlockLength:
-  IgnoredMethods: ['describe', 'context', 'shared_examples_for', 'shared_examples', 'feature', 'shared_context']
+  IgnoredMethods: [
+      'describe', 'context', 'shared_examples_for', 'shared_examples',
+      'feature', 'shared_context', 'FactoryBot.define'
+  ]
