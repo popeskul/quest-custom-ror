@@ -4,7 +4,7 @@
 module Admin
   # EventsController for Admin namespace
   class EventsController < Admin::BaseController
-    include EventsHelper
+    include AuthorizationUtils
 
     before_action :find_event, only: %i[show edit update destroy]
     before_action :check_event_policy, only: %i[edit update destroy]
@@ -36,7 +36,7 @@ module Admin
     end
 
     def check_event_policy
-      check_policy @event, action_name
+      check_policy EventPolicy, @event
     end
   end
 end

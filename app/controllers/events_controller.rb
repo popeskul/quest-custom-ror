@@ -2,7 +2,7 @@
 
 # Controller for events
 class EventsController < ApplicationController
-  include EventsHelper
+  include AuthorizationUtils
 
   before_action :authenticate_app_current_user!, only: %i[new create edit update destroy]
   before_action :find_event, only: %i[show edit update destroy]
@@ -55,6 +55,6 @@ class EventsController < ApplicationController
   end
 
   def check_event_policy
-    check_policy @event, action_name
+    check_policy EventPolicy, @event
   end
 end

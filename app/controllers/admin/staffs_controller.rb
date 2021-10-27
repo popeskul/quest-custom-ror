@@ -4,7 +4,7 @@
 module Admin
   # implement UsersController
   class StaffsController < Admin::BaseController
-    include StaffsHelper
+    include AuthorizationUtils
 
     before_action :find_staff, only: %i[update destroy]
     before_action :check_event_policy
@@ -53,7 +53,7 @@ module Admin
     end
 
     def check_event_policy
-      check_policy @staff, action_name
+      check_policy Admin::StaffPolicy, @staff
     end
   end
 end

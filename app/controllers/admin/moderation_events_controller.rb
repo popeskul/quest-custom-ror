@@ -4,7 +4,7 @@
 module Admin
   # EventsController for Admin namespace
   class ModerationEventsController < Admin::BaseController
-    include ModerationEventsHelper
+    include AuthorizationUtils
 
     before_action :find_event, only: %i[approve decline]
     before_action :check_moderation_policy, only: %i[index approve decline]
@@ -36,7 +36,7 @@ module Admin
     end
 
     def check_moderation_policy
-      check_policy @event, action_name
+      check_policy Admin::ModerationEventPolicy, @event
     end
   end
 end
