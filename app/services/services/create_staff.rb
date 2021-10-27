@@ -7,14 +7,14 @@ module Services
     attr_reader :staff
 
     def initialize(options = {})
-      options_with_password = options.merge(password: Faker::Internet.password(min_length: 8))
+      password = Faker::Internet.password(min_length: 8)
+      options_with_password = options.merge(password: password, password_confirmation: password)
+
       @staff = Staff.new(options_with_password)
     end
 
     def call
-      @staff.save.tap { |_| send_email if @staff.valid? }
-
-      @staff
+      @staff.tap { |_| send_email if @staff.save }
     end
 
     private
