@@ -27,4 +27,12 @@ class ApplicationController < ActionController::Base
   def set_locale
     I18n.locale = I18n.locale_available?(params[:lang]) ? params[:lang] : I18n.default_locale
   end
+
+  def app_current_user
+    current_user || current_staff
+  end
+
+  def authenticate_app_current_user!
+    redirect_to root_path, error: t('devise.failure.unauthenticated') unless app_current_user.present?
+  end
 end

@@ -4,7 +4,7 @@
 class ApplicationPolicy
   attr_reader :user, :record
 
-  def initialize(user, record)
+  def initialize(user, record = nil)
     @user = user
     @record = record
   end
@@ -44,10 +44,10 @@ class ApplicationPolicy
   end
 
   def author?
-    user.id == record.author_id
+    user.id == record&.event_postable_id
   end
 
   def admin?
-    user.admin if user_present?
+    Staff == user.class if user_present?
   end
 end

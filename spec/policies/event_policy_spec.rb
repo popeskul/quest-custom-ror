@@ -26,7 +26,7 @@ RSpec.describe EventPolicy, type: :policy do
 
   context 'being an author of resource' do
     let(:user) { create(:user) }
-    let(:event) { create(:event, author: user) }
+    let(:event) { create(:event, event_postable: user) }
 
     it { is_expected.to permit_new_and_create_actions }
     it { is_expected.to permit_edit_and_update_actions }

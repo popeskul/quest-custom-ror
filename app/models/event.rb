@@ -6,7 +6,7 @@ class Event < ApplicationRecord
 
   scope :for_moderation, -> { where.not(aasm_state: 'approve') }
 
-  belongs_to :author, class_name: 'User', foreign_key: 'author_id'
+  belongs_to :event_postable, polymorphic: true, foreign_key: 'event_postable_id'
 
   validates :title, presence: true
   validates :location, presence: true

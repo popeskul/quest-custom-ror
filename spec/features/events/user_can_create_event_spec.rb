@@ -7,7 +7,7 @@ feature 'User can create an event', '
   to the form page and fill the form
 ' do
   context 'Authenticated user' do
-    given!(:existing_admin) { create(:user, admin: true) }
+    given!(:existing_admin) { create(:staff) }
     given!(:existing_user) { create(:user) }
 
     context 'as admin' do

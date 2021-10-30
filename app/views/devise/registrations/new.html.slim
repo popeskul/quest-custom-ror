@@ -15,8 +15,6 @@ h2 Sign up
               required: true,
               input_html: { autocomplete: "new-password", class: "form-control" },
               label_html: { class: "form-label" }
-    .mb-3
-      = f.input :admin, as: :boolean, input_html: { class: "form-check-input" }, label_html: { class: "form-check-label" }
   .mb-3
     .form-actions
       = f.button :submit, "Sign up", class: "btn btn-primary"

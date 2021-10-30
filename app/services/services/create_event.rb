@@ -6,13 +6,13 @@ module Services
   class CreateEvent
     attr_reader :event
 
-    def initialize(options = {})
-      @event = Event.new(options)
+    def initialize(user, options = {})
+      @event = user.events.new(options)
     end
 
     def call
       @event.save.tap do |_|
-        send_email
+        send_email if @event.valid?
       end
 
       @event

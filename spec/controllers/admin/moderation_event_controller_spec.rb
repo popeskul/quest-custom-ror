@@ -3,12 +3,12 @@
 require 'rails_helper'
 
 RSpec.describe Admin::ModerationEventsController, type: :controller do
-  let(:user_adam) { create(:user, admin: true) }
-  let(:user_eva) { create(:user, admin: true) }
+  let(:user_adam) { create(:staff) }
+  let(:user_eva) { create(:staff) }
 
-  let!(:existing_events) { create_list(:event, 2, author_id: user_adam.id) }
-  let!(:existing_event2) { create(:event, author_id: user_eva.id) }
-  let!(:declined_event)  { create(:event, :declined, author_id: user_eva.id) }
+  let!(:existing_events) { create_list(:event, 2, event_postable: user_adam) }
+  let!(:existing_event2) { create(:event, event_postable: user_eva) }
+  let!(:declined_event)  { create(:event, :declined, event_postable: user_eva) }
 
   let(:approve_event2) { patch :approve, params: { id: existing_event2.id } }
   let(:decline_event2) { patch :decline, params: { id: existing_event2.id } }

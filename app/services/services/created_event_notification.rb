@@ -5,7 +5,7 @@ module Services
   # Implement Notification
   class CreatedEventNotification < ApplicationMailer
     def call(event)
-      admins = User.for_admin
+      admins = Staff.all
 
       admins.each do |admin|
         NotificationMailer.event_created(admin, event).deliver_later

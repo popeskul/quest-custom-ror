@@ -4,15 +4,14 @@
 module Admin
   # EventsController for Admin namespace
   class EventsController < Admin::BaseController
-    before_action :find_event, only: %i[show edit update destroy]
+    include AuthorizationUtils
 
-    def edit
-      authorize @event
-    end
+    before_action :find_event, only: %i[show edit update destroy]
+    before_action :check_event_policy, only: %i[edit update destroy]
+
+    def edit; end
 
     def update
-      authorize @event
-
       if @event.update(event_params)
         redirect_to event_path(@event), notice: t('.success')
       else
@@ -21,8 +20,6 @@ module Admin
     end
 
     def destroy
-      authorize @event
-
       @event.destroy
       redirect_to events_path, notice: t('.success')
     end
@@ -36,6 +33,10 @@ module Admin
     def event_params
       params.require(:event).permit(:title, :description, :location, :organizer_email,
                                     :organizer_telegram, :link, :start_time, :end_time)
+    end
+
+    def check_event_policy
+      check_policy EventPolicy, @event
     end
   end
 end

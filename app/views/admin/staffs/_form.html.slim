@@ -1,0 +1,5 @@
+= simple_form_for [:admin, @staff], local: true do |f|
+  .mb-3
+    = f.input :email, label_html: { class: 'form-label' }
+  .mb-3
+    = f.button :submit, class: 'btn btn-primary'

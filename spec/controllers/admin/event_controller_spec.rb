@@ -3,14 +3,14 @@
 require 'rails_helper'
 
 RSpec.describe Admin::EventsController, type: :controller do
-  let(:admin) { create(:user, admin: true) }
-  let(:admin2) { create(:user, admin: true) }
+  let(:admin)  { create(:staff) }
+  let(:admin2) { create(:staff) }
 
-  let!(:existing_event) { create(:event, author_id: admin.id) }
-  let(:event2) { create(:event, author_id: admin2.id) }
+  let!(:existing_event) { create(:event, event_postable: admin) }
+  let!(:existing_event2) { create(:event, event_postable: admin2) }
 
   let(:delete_event) { delete :destroy, params: { id: existing_event.id } }
-  let(:delete_event2) { delete :destroy, params: { id: event2.id } }
+  let(:delete_event2) { delete :destroy, params: { id: existing_event2.id } }
 
   context 'GET #edit' do
     describe 'author of the event' do
@@ -27,7 +27,7 @@ RSpec.describe Admin::EventsController, type: :controller do
     describe 'not author of the event' do
       before do
         login(admin)
-        get :edit, params: { id: event2.id }
+        get :edit, params: { id: existing_event2.id }
       end
 
       it 'renders edit view' do
@@ -37,6 +37,8 @@ RSpec.describe Admin::EventsController, type: :controller do
   end
 
   describe 'PATCH #update' do
+    let(:update_event) { patch :update, params: { id: existing_event, event: attributes_for(:event) } }
+
     before { login(admin) }
 
     context 'Update with valid attributes' do
@@ -47,9 +49,9 @@ RSpec.describe Admin::EventsController, type: :controller do
       end
 
       it 'redirect to updated event' do
-        patch :update, params: { id: existing_event, event: attributes_for(:event) }
+        update_event
 
-        expect(response).to redirect_to event_path(Event.last)
+        expect(response).to redirect_to event_path existing_event
       end
     end
 
@@ -70,7 +72,7 @@ RSpec.describe Admin::EventsController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
-    context 'authenticated user' do
+    context 'authenticated admin' do
       context 'deletes his event' do
         before { login(admin) }
 
@@ -89,7 +91,7 @@ RSpec.describe Admin::EventsController, type: :controller do
         before { login(admin) }
 
         it 'successfully delete the event' do
-          event2
+          existing_event2
           expect { delete_event2 }.to change(Event, :count).by(-1)
         end
       end
@@ -102,7 +104,7 @@ RSpec.describe Admin::EventsController, type: :controller do
 
       it 'redirects to login page' do
         delete_event
-        expect(response).to redirect_to new_user_session_path
+        expect(response).to redirect_to new_staff_session_path
       end
     end
   end

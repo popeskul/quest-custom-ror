@@ -1,0 +1,13 @@
+li.event.list-group-item.d-flex.justify-content-between
+  = staff.email
+
+  div
+    = simple_form_for [:admin, staff], local: true do |f|
+      div.row.align-items-end
+        .mb-3.col-auto
+          = f.input :role, collection: Staff::ROLES, input_html: { value: staff.role }, selected: staff.role
+        .mb-3.col-auto
+          = f.button :submit, class: 'btn btn-primary'
+        .mb-3.col-auto
+          = link_to t('.delete'), admin_staff_path(staff), method: :delete,
+                  class: 'btn btn-outline-danger', data: { confirm: "Are you sure?" }

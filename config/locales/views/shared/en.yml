@@ -1,0 +1,12 @@
+en:
+  invalid_email: 'invalid email'
+  invalid_date: 'must be a valid date'
+
+  shared:
+    header:
+      all-events: "All events"
+      log-out: "Log out"
+      enter-as: "Enter as %{user}"
+      registration: "Registration"
+    errors:
+      not_authorized: "You are not authorized to view this page"

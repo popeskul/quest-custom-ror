@@ -6,11 +6,11 @@ feature 'User can edit an event', '
   In order to update an event, user need to go
   to the show page and fill form
 ' do
-  given!(:existing_admin) { create(:user, admin: true) }
-  given!(:existing_admin2) { create(:user, admin: true) }
+  given!(:existing_admin)  { create(:staff) }
+  given!(:existing_admin2) { create(:staff) }
 
-  given!(:existing_event) { create(:event, author_id: existing_admin.id) }
-  given!(:existing_event2) { create(:event, author_id: existing_admin2.id) }
+  given!(:existing_event)  { create(:event, event_postable: existing_admin) }
+  given!(:existing_event2) { create(:event, event_postable: existing_admin2) }
 
   context 'Authenticated user' do
     describe 'as admin' do

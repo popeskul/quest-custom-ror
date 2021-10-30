@@ -1,0 +1,8 @@
+ul.nav.nav-pills.mb-4
+  li.nav-item.me-3
+    = link_to_unless_current 'Moderation Events', admin_moderation_events_url, class: 'btn btn-outline-primary' do
+      = link_to "Moderation Events", nil, class: 'btn btn-primary'
+
+  li.nav-item.me-3
+    = link_to_unless_current 'Moderate Admins', admin_staffs_url, class: 'btn btn-outline-primary' do
+      = link_to "Moderate Admins", nil, class: 'btn btn-primary'

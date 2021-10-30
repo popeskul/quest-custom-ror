@@ -4,8 +4,10 @@
 module Admin
   # EventsController for Admin namespace
   class ModerationEventsController < Admin::BaseController
-    before_action :auth_with_policy, only: %i[index approve decline]
+    include AuthorizationUtils
+
     before_action :find_event, only: %i[approve decline]
+    before_action :check_moderation_policy, only: %i[index approve decline]
 
     def index
       @events = Event.for_moderation.order(created_at: :asc).page(params[:page])
@@ -29,12 +31,12 @@ module Admin
 
     private
 
-    def auth_with_policy
-      authorize Event, policy_class: ModerationEventPolicy
-    end
-
     def find_event
       @event = Event.find(params[:id])
+    end
+
+    def check_moderation_policy
+      check_policy Admin::ModerationEventPolicy, @event
     end
   end
 end

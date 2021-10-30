@@ -4,7 +4,8 @@ require 'faker'
 
 FactoryBot.define do
   factory :event do
-    association :author, factory: :user
+    for_user
+
     title                              { Faker::Name.name }
     description                        { Faker::Lorem.sentence }
     location                           { Faker::Address.full_address }
@@ -25,6 +26,14 @@ FactoryBot.define do
 
     trait :declined do
       aasm_state { 'declined' }
+    end
+
+    trait :for_user do
+      association :event_postable, factory: :user
+    end
+
+    trait :for_admin do
+      association :event_postable, factory: :staff
     end
   end
 end

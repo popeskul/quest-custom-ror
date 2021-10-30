@@ -3,17 +3,17 @@
 require 'rails_helper'
 
 RSpec.describe EventsController, type: :controller do
-  let(:user) { create(:user) }
+  let(:user)  { create(:user) }
   let(:user2) { create(:user) }
 
-  let!(:existing_event) { create(:event, author_id: user.id) }
-  let(:event2) { create(:event, author_id: user2.id) }
+  let!(:existing_event) { create(:event, event_postable: user) }
+  let(:event2) { create(:event, event_postable: user2) }
 
-  let(:delete_event) { delete :destroy, params: { id: existing_event.id } }
+  let(:delete_event)  { delete :destroy, params: { id: existing_event.id } }
   let(:delete_event2) { delete :destroy, params: { id: event2.id } }
 
   describe 'GET #index' do
-    let(:events) { create_list(:event, 15, author_id: user.id) }
+    let(:events) { create_list(:event, 15, event_postable: user) }
 
     before do
       login(user)
