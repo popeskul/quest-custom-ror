@@ -70,10 +70,15 @@ RSpec.describe EventsController, type: :controller do
     before { login(user) }
 
     context 'with valid attributes' do
-      subject { post :create, params: { event: attributes_for(:event) } }
+      subject { post :create, params: { event: attributes_for(:event, :with_tags) } }
 
       it 'save a new event' do
         expect { subject }.to change(Event, :count).by(1)
+      end
+
+      it 'with tags' do
+        subject
+        expect(Event.last.tag_list).to eq(assigns[:event][:tag_list])
       end
 
       it 'redirects to show' do

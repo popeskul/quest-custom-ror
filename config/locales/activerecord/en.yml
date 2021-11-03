@@ -11,3 +11,10 @@ en:
       messages:
         required: "Required field"
         blank: "Can't be empty"
+  admin:
+    tags:
+      tag:
+        delete: "Delete tag"
+        edit: "Edit tag"
+      update:
+        success: "Tag successfully updated."

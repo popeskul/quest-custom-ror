@@ -5,15 +5,18 @@ require 'rails_helper'
 shared_examples_for 'Update en event by form' do
   scenario 'save an event with valid attributes' do
     title = 'title title'
+    tag_name = ActsAsTaggableOn::Tag.first.name
 
     within '.edit_event' do
       fill_in 'Title', with: title
+      select tag_name, from: 'event[tag_list][]'
 
       click_on t('helpers.submit.admin.event.update')
     end
 
     expect(page).to have_content t('.admin.events.update.success')
     expect(page).to have_content title
+    expect(page).to have_content tag_name
   end
 end
 
@@ -30,6 +33,7 @@ end
 shared_examples_for 'Create an event' do
   it 'create an event' do
     title = 'title title'
+    tag_name = ActsAsTaggableOn::Tag.first.name
 
     within '.new_event' do
       fill_in t('.simple_form.labels.admin.event.title'), with: title
@@ -38,11 +42,13 @@ shared_examples_for 'Create an event' do
 
       fill_in t('.simple_form.labels.admin.event.start_time'), with: '2021-09-03'
       fill_in t('.simple_form.labels.admin.event.end_time'), with: '2022-09-03'
+      select tag_name, from: 'event[tag_list][]'
 
       click_on t('helpers.submit.admin.event.create')
     end
 
     expect(page).to have_content t('.admin.events.create.success')
     expect(page).to have_content title
+    expect(page).to have_content tag_name
   end
 end

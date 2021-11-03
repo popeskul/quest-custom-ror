@@ -7,3 +7,7 @@ en:
           update: "Update Event"
           edit: "Edit Event"
           delete: "Delete Event"
+      /admin/tags/new:
+        submit: "Create Tag"
+      acts_as_taggable_on_tag:
+        update: "Update Tag"

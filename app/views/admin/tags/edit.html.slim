@@ -1,0 +1,7 @@
+/ = render 'form', tag: @tag
+
+= simple_form_for [:admin, @tag], url: admin_tag_path(@tag), method: :patch, local: true do |f|
+  .mb-3
+    = f.input :name, label_html: { class: 'form-label' }
+  .mb-3
+    = f.button :submit, class: 'btn btn-primary'

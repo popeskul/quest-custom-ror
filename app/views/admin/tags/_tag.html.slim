@@ -1,0 +1,7 @@
+li.event.list-group-item.d-flex.justify-content-between.align-items-center
+  = tag.name
+
+  .btn-group
+    = link_to t('.edit'), edit_admin_tag_path(tag), class: 'btn btn-outline-primary'
+    = link_to t('.delete'), admin_tag_path(tag), method: :delete, class: 'btn btn-outline-danger',
+            data: { confirm: "Are you sure?" }

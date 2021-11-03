@@ -9,6 +9,7 @@ feature 'User can create an event', '
   context 'Authenticated user' do
     given!(:existing_admin) { create(:staff) }
     given!(:existing_user) { create(:user) }
+    given!(:existing_tags) { create_list(:tag, 2) }
 
     context 'as admin' do
       background do

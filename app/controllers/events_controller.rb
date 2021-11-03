@@ -16,10 +16,12 @@ class EventsController < ApplicationController
 
   def new
     @event = Event.new
+    @tags = helpers.all_tags
   end
 
   def create
     @event = Services::CreateEvent.new(app_current_user, event_params).call
+    @tags = helpers.all_tags
 
     if @event.save
       redirect_to event_path(@event), notice: t('.success')
@@ -28,7 +30,9 @@ class EventsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    @tags = helpers.all_tags
+  end
 
   def update
     if @event.update(event_params)
@@ -50,8 +54,8 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:title, :description, :location, :organizer_email,
-                                  :organizer_telegram, :link, :start_time, :end_time)
+    params.require(:event).permit(:title, :description, :location, :organizer_email, :organizer_telegram,
+                                  :link, :start_time, :end_time, tag_list: [])
   end
 
   def check_event_policy

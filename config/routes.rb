@@ -17,6 +17,8 @@ Rails.application.routes.draw do
 
     resources :staffs
 
+    resources :tags
+
     resources :moderation_events do
       member do
         post :decline

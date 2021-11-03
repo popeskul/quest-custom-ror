@@ -9,6 +9,7 @@ feature 'User can edit an event', '
   given!(:existing_admin)  { create(:staff) }
   given!(:existing_admin2) { create(:staff) }
 
+  given!(:existing_tags)   { create_list(:tag, 2) }
   given!(:existing_event)  { create(:event, event_postable: existing_admin) }
   given!(:existing_event2) { create(:event, event_postable: existing_admin2) }
 
