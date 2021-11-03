@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :tag, class: ActsAsTaggableOn::Tag do
-    name { Faker::Finance.stock_market }
+    sequence(:name) { |n| "#{Faker::Finance.stock_market}-#{n}" }
 
     trait :invalid do
       name { nil }
