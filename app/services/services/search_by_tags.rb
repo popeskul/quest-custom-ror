@@ -7,16 +7,22 @@ module Services
     attr_reader :tags
 
     def initialize(text, tags)
-      @text = text
+      @text = text.strip
       @tags = tags
     end
 
     def call
       return [] if @tags.empty? || @text.empty?
 
-      transformed_tags = tags.join('|')
+      total_tags = []
 
-      @text.scan(/\b#{transformed_tags}\b/i)
+      @tags.filter do |tag|
+        tag.keys&.split(',')&.each do |key|
+          total_tags << tag if @text.include?(key)
+        end
+      end
+
+      total_tags
     end
   end
 end

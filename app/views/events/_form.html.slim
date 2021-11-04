@@ -16,6 +16,6 @@
   .mb-3
     = f.input :end_time, as: :date, label_html: { class: 'form-label' }, html5: true
   .mb-3
-    = f.input :tag_list, collection: @tags.map { |i| i.name }, input_html: { multiple: true }
+    = f.input :tag_list, collection: @tags&.map { |i| i.name }, input_html: { multiple: true }
   .mb-3
     = f.button :submit, class: 'btn btn-primary'

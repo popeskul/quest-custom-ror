@@ -18,15 +18,18 @@ feature 'Staff can create a tag', '
 
         it 'create tag' do
           tag_name = 'new tag name'
+          tag_keys = 'ruby, backend'
 
           within '.new_acts_as_taggable_on_tag' do
             fill_in t('.simple_form.labels.admin.tag.name'), with: tag_name
+            fill_in t('.simple_form.labels.admin.tag.keys'), with: tag_keys
 
             click_on t('helpers.submit./admin/tags/new.submit')
           end
 
           expect(page).to have_content t('admin.tags.create.success')
           expect(page).to have_content tag_name
+          expect(page).to have_content tag_keys
         end
       end
     end

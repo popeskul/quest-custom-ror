@@ -160,7 +160,7 @@ RSpec.describe EventsController, type: :controller do
 
     context 'Update with invalid attributes' do
       before do
-        patch :update, params: { id: existing_event, event: attributes_for(:event, :invalid_dates), format: :js }
+        patch :update, params: { id: existing_event, event: attributes_for(:event, :invalid_title), format: :js }
       end
 
       it 'does not change event' do

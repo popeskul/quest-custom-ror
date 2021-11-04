@@ -3,16 +3,18 @@
 require 'rails_helper'
 
 RSpec.describe Services::SearchByTags do
-  let(:text) { 'ruby docker pg 1' }
-  let(:tag_names) { %w[ruby dev docker] }
+  let(:text_for_devops) { 'docker, pg' }
+  let(:tag_devops) { create(:tag, keys: 'docker, some1') }
+  let!(:all_tags) { ActsAsTaggableOn::Tag.all }
 
-  let(:search_with_tags)    { Services::SearchByTags.new(text, tag_names).call }
-  let(:search_without_tags) { Services::SearchByTags.new(text, []).call }
+  let(:search_with_tags)    { Services::SearchByTags.new(text_for_devops, all_tags).call }
+  let(:search_without_tags) { Services::SearchByTags.new(text_for_devops, []).call }
   let(:search_without_text) { Services::SearchByTags.new('', []).call }
 
   describe '#call' do
     it 'invoke and call with the tags and return correct array' do
-      expect(search_with_tags).to eq [tag_names[0], tag_names[2]]
+      tag_devops
+      expect(search_with_tags).to eq [tag_devops]
     end
 
     it 'invoke and call with empty tags' do

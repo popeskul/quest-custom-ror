@@ -6,6 +6,7 @@ class EventsController < ApplicationController
 
   before_action :authenticate_app_current_user!, only: %i[new create edit update destroy]
   before_action :find_event, only: %i[show edit update destroy]
+  before_action :find_tags, only: %i[new create edit]
   before_action :check_event_policy, only: %i[new create edit update destroy]
 
   def index
@@ -16,12 +17,10 @@ class EventsController < ApplicationController
 
   def new
     @event = Event.new
-    @tags = helpers.all_tags
   end
 
   def create
     @event = Services::CreateEvent.new(app_current_user, event_params).call
-    @tags = helpers.all_tags
 
     if @event.save
       redirect_to event_path(@event), notice: t('.success')
@@ -30,12 +29,10 @@ class EventsController < ApplicationController
     end
   end
 
-  def edit
-    @tags = helpers.all_tags
-  end
+  def edit; end
 
   def update
-    if @event.update(event_params)
+    if Services::UpdateEvent.new(@event, event_params).call
       redirect_to event_path(@event), notice: t('.success')
     else
       render :edit
@@ -51,6 +48,10 @@ class EventsController < ApplicationController
 
   def find_event
     @event = Event.find(params[:id])
+  end
+
+  def find_tags
+    @tags = ActsAsTaggableOn::Tag.all
   end
 
   def event_params

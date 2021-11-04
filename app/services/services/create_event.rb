@@ -28,7 +28,7 @@ module Services
     end
 
     def find_tags_in_description
-      Services::SearchByTags.new(@event.description, ActsAsTaggableOn::Tag.all.map(&:name)).call
+      Services::SearchByTags.new(@event.description, ActsAsTaggableOn::Tag.all).call
     end
   end
 end

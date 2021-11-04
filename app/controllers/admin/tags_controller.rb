@@ -14,12 +14,11 @@ module Admin
     end
 
     def new
-      @tag = helpers.new_tag
+      @tag = ActsAsTaggableOn::Tag.new
     end
 
     def create
       @tag = Services::CreateTag.new(tag_params).call
-
       if @tag.save
         redirect_to admin_tags_path, notice: t('.success')
       else
@@ -45,7 +44,7 @@ module Admin
     private
 
     def find_tag
-      @tag = helpers.find_tag(params[:id])
+      @tag = ActsAsTaggableOn::Tag.find(params[:id])
     end
 
     def check_tag_policy
@@ -53,7 +52,7 @@ module Admin
     end
 
     def tag_params
-      params.require(:acts_as_taggable_on_tag).permit(:name)
+      params.require(:acts_as_taggable_on_tag).permit(:name, :keys)
     end
   end
 end
