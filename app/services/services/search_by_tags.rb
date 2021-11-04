@@ -14,6 +14,12 @@ module Services
     def call
       return [] if @tags.empty? || @text.empty?
 
+      found_tags_by_keys
+    end
+
+    private
+
+    def found_tags_by_keys
       total_tags = []
 
       @tags.filter do |tag|
