@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-# Service for CreateStaff
+# Service for CreateTag
 module Services
-  # Implement CreateStaff
+  # Implement CreateTag
   class CreateTag
     attr_reader :tag
 
@@ -11,6 +11,7 @@ module Services
     end
 
     def call
+      @tag.save
       @tag
     end
   end

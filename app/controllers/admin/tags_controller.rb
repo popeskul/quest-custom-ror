@@ -19,7 +19,7 @@ module Admin
 
     def create
       @tag = Services::CreateTag.new(tag_params).call
-      if @tag.save
+      if @tag.valid?
         redirect_to admin_tags_path, notice: t('.success')
       else
         render :new
