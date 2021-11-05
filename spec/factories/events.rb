@@ -5,7 +5,6 @@ require 'faker'
 FactoryBot.define do
   factory :event do
     for_user
-
     title                              { Faker::Name.name }
     description                        { Faker::Lorem.sentence }
     location                           { Faker::Address.full_address }
@@ -20,12 +19,20 @@ FactoryBot.define do
       sequence(:end_time)          { |n| DateTime.new(2000 + n, 10, 1) }
     end
 
+    trait :invalid_title do
+      title { nil }
+    end
+
     trait :approved do
       aasm_state { 'approved' }
     end
 
     trait :declined do
       aasm_state { 'declined' }
+    end
+
+    trait :with_tags do
+      tag_list { [Faker::App.name] }
     end
 
     trait :for_user do

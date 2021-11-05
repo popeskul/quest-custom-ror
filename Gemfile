@@ -6,6 +6,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.7.3'
 
 gem 'aasm'
+gem 'acts-as-taggable-on', '~> 8.0'
 gem 'config'
 gem 'devise'
 gem 'dry-monads', '~> 1.4'
@@ -42,6 +43,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'i18n-debug'
   gem 'listen', '~> 3.3'
   gem 'rack-mini-profiler', '~> 2.0'
   gem 'spring'

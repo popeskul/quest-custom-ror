@@ -40,4 +40,24 @@ RSpec.describe Event, type: :model do
       it { expect(event).to transition_from(:pending).to(:declined).on_event(:decline) }
     end
   end
+
+  describe 'tag_list' do
+    let(:event) { create(:event) }
+
+    it 'user can see all tags' do
+      expect(event.tag_list).to eq []
+    end
+
+    it 'user can add tag' do
+      tag_name = 'tag1'
+      expect { event.tag_list.add(tag_name) }.to change(event, :tag_list)
+    end
+
+    it 'user can remove tag' do
+      event.tag_list.add('tag1', 'tag2')
+
+      expect { event.tag_list.remove('tag1') }.to change(event, :tag_list)
+      expect(event.tag_list).to eq ['tag2']
+    end
+  end
 end

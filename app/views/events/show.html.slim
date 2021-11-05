@@ -1,6 +1,14 @@
 p = @event.title
+p = @event.description
 
 p = t('.status-is', status: @event.aasm_state)
+
+p Tags
+ul
+  - @event.tag_list.each do |tag_name|
+    li
+      span.badge.rounded-pill.bg-primary
+        = tag_name
 
 .mb-3
   = link_to t('.button.edit'), edit_event_path(@event), class: 'btn btn-outline-primary'

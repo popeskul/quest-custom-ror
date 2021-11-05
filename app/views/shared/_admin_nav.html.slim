@@ -6,3 +6,7 @@ ul.nav.nav-pills.mb-4
   li.nav-item.me-3
     = link_to_unless_current 'Moderate Admins', admin_staffs_url, class: 'btn btn-outline-primary' do
       = link_to "Moderate Admins", nil, class: 'btn btn-primary'
+
+  li.nav-item.me-3
+    = link_to_unless_current 'Tags', admin_tags_url, class: 'btn btn-outline-primary' do
+      = link_to "Tags", nil, class: 'btn btn-primary'

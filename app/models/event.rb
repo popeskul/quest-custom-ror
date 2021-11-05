@@ -16,6 +16,8 @@ class Event < ApplicationRecord
 
   paginates_per 10
 
+  acts_as_taggable_on :tag
+
   aasm do
     state :pending, initial: true
     state :approved

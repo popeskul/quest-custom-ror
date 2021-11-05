@@ -1,0 +1,8 @@
+= simple_form_for [:admin, @tag], url: admin_tags_path(@tag), local: true do |f|
+  .d-flex.mb-3.row
+    .col
+      = f.input :name, label_html: { class: 'form-label' }
+    .col
+      = f.input :keys, label_html: { class: 'form-label' }
+  .mb-3
+    = f.button :submit, class: 'btn btn-primary'

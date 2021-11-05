@@ -1,0 +1,8 @@
+h1 All tags
+
+div
+  = link_to t('.create'), new_admin_tag_url, class: 'btn btn-outline-primary mb-3'
+
+ul.events.list-group.mb-3
+  - @tags.each do |tag|
+    = render 'admin/tags/tag', tag: tag
