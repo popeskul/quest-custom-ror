@@ -1,0 +1,10 @@
+---
+en:
+  admin:
+    tags:
+      create:
+        success: Tag successfully created.
+      destroy:
+        success: Tag successfully deleted.
+      index:
+        create: Create a new tag

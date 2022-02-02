@@ -3,7 +3,17 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  include_examples 'model has relations'
+  describe 'Relations' do
+    it { should have_many(:events).dependent(:destroy) }
+    it { should have_many(:delivered_user_events).dependent(:destroy) }
+  end
 
-  include_examples 'model has validations'
+  describe 'Validations' do
+    it { should validate_presence_of :email }
+    it { should validate_presence_of :password }
+  end
+
+  describe '.generate_token' do
+    it { expect(User.generate_token).to have_attributes(size: 20) }
+  end
 end

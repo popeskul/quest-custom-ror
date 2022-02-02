@@ -20,7 +20,7 @@ module Admin
     def create
       options = params.require(:staff).permit(:email)
 
-      @staff = Services::CreateStaff.new(options).call
+      @staff = Staffs::Services::CreateStaff.new(options).call
 
       if @staff.save
         redirect_to admin_staffs_path, notice: t('.success')

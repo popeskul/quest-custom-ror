@@ -1,0 +1,7 @@
+h1 = t('.title')
+
+p = t('.description', email: @email)
+
+ul
+  - @tags.each do |tag|
+    li = tag

@@ -1,9 +1,0 @@
-en:
-  admin:
-    moderation_events:
-      approve:
-        success: 'Event was successfully approved'
-        failure: 'Event was not approved'
-      decline:
-        success: 'Event was successfully declined'
-        failure: 'Event was not declined'

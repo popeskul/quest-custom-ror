@@ -1,0 +1,6 @@
+---
+en:
+  tag_subscriptions:
+    create:
+      success: Successfully subscribed
+    title: Subscribe to the weekly newsletter by tags

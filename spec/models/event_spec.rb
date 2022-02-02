@@ -5,6 +5,7 @@ require 'rails_helper'
 RSpec.describe Event, type: :model do
   describe 'Relations' do
     it { should belong_to(:event_postable) }
+    it { should have_many(:delivered_user_events) }
   end
 
   describe 'Validations' do
@@ -58,6 +59,15 @@ RSpec.describe Event, type: :model do
 
       expect { event.tag_list.remove('tag1') }.to change(event, :tag_list)
       expect(event.tag_list).to eq ['tag2']
+    end
+  end
+
+  describe 'Scopes' do
+    let!(:user) { build(:user) }
+    let!(:event) { create(:event, :pending) }
+
+    it '.for_moderation' do
+      expect(Event.for_moderation.uniq).to eq [event]
     end
   end
 end

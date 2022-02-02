@@ -1,0 +1,10 @@
+---
+en:
+  helpers:
+    submit:
+      acts_as_taggable_on_tag:
+        update: Update
+      admin:
+        tag:
+          new:
+            submit: Create Tag

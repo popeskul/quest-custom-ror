@@ -1,0 +1,7 @@
+---
+en:
+  staff_mailer:
+    staff_updated:
+      description: '%{email} was updated with the new role "%{role}"'
+      subject: Event updated
+      title: Event updated

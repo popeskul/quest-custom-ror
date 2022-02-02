@@ -1,0 +1,12 @@
+---
+en:
+  tag_subscription_mailer:
+    digest:
+      description: 'Hello %{email}!. You have been subscribed for tags:'
+      events: Your events
+      subject: Your tags
+      title: You have been subscribed for tags
+    subscription_created:
+      description: 'Hello %{email}!. You have been subscribed for tags:'
+      subject: Tags subscribed
+      title: You have been subscribed for tags

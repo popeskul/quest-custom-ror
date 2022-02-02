@@ -1,0 +1,10 @@
+---
+en:
+  admin:
+    moderation_events:
+      approve:
+        failure: Event was not approved
+        success: Event was successfully approved
+      decline:
+        failure: Event was not declined
+        success: Event was successfully declined

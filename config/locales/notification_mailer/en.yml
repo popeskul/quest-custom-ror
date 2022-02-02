@@ -1,0 +1,7 @@
+---
+en:
+  notification_mailer:
+    event_created:
+      description: "%{user} created an event. Please approve or decline this event"
+      subject: Event created
+      title: Event created

@@ -5,4 +5,5 @@
     .col
       = f.input :keys, label_html: { class: 'form-label' }
   .mb-3
-    = f.button :submit, class: 'btn btn-primary'
+    = f.button :submit, class: 'btn btn-primary' do
+      = t('helpers.submit.admin.tag.new.submit')

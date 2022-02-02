@@ -24,7 +24,7 @@ feature 'Staff can create a tag', '
             fill_in t('.simple_form.labels.admin.tag.name'), with: tag_name
             fill_in t('.simple_form.labels.admin.tag.keys'), with: tag_keys
 
-            click_on t('helpers.submit./admin/tags/new.submit')
+            click_on t('helpers.submit.admin.tag.new.submit')
           end
 
           expect(page).to have_content t('admin.tags.create.success')

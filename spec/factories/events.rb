@@ -27,6 +27,10 @@ FactoryBot.define do
       aasm_state { 'approved' }
     end
 
+    trait :pending do
+      aasm_state { 'pending' }
+    end
+
     trait :declined do
       aasm_state { 'declined' }
     end

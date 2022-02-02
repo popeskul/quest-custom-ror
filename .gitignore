@@ -10,6 +10,7 @@
 .DS_Store
 coverage/
 logfile
+dump.rdb
 
 # Ignore all logfiles and tempfiles.
 /log/*

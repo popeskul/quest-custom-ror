@@ -1,0 +1,5 @@
+---
+en:
+  validators:
+    invalid_date: must be a valid date
+    invalid_email: invalid email

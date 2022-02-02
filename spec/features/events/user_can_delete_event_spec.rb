@@ -37,7 +37,7 @@ feature 'User can delete an event', '
     scenario 'can not delete not his own event' do
       visit event_path(existing_event)
 
-      click_on t('.admin.events.show.button.delete')
+      click_on t('.events.show.button.delete')
 
       expect(page).to_not have_content t('.admin.events.destroy.success')
     end
