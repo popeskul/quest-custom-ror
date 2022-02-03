@@ -23,7 +23,6 @@ gem 'sass-rails', '>= 6'
 gem 'sidekiq'
 gem 'simple_form'
 gem 'slim-rails'
-gem 'travis'
 gem 'turbolinks', '~> 5'
 gem 'webpacker', '~> 5.0'
 

@@ -1,0 +1,86 @@
+name: CI
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        ruby: [2.7.3]
+    runs-on: ${{ matrix.os }}
+    services:
+      redis:
+        image: redis
+        ports:
+          - 6379:6379
+        options: --entrypoint redis-server
+      postgres:
+        image: postgres:11
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: "postgres"
+          POSTGRES_DB: quest_custom_ror_test
+        ports:
+          - 5432:5432
+        # needed because the postgres container does not provide a healthcheck
+        # tmpfs makes DB faster by using RAM
+        options: >-
+          --mount type=tmpfs,destination=/var/lib/postgresql/data
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      CC_TEST_REPORTER_ID: 02113260ae107eefaae091504b984e53e34afa209e37612aeb2acf67189c1e07
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Chrome
+        uses: browser-actions/setup-chrome@latest
+        with:
+          chrome-version: stable
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
+
+      # setup cc-test-reporter
+      - name: install cc-test-reporter
+        run: |
+          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+          chmod +x ./cc-test-reporter
+
+      - name: bundle install
+        run: bundle install --jobs=3 --retry=3
+
+      # setup npm
+      - name: Install dependencies
+        run: yarn install
+
+      # setup rails
+#      - name: rails db:create db:migrate
+#        run: RAILS_ENV=test bundle exec rake db:create db:migrate
+#
+#      - name: rails db:schema:load
+#        run: RAILS_ENV=test bundle exec rake db:schema:load
+
+      - name: Precompile assets
+        run: RAILS_ENV=test bundle exec rails assets:precompile
+
+      # run tests
+      - name: Run tests
+        run: RAILS_ENV=test bundle exec rspec spec/
+
+      # run coverage
+      - name: coverage
+        run: |
+          ./cc-test-reporter format-coverage -t simplecov -o coverage/.resultset.json
+          ./cc-test-reporter sum-coverage coverage/.resultset.json
+          if [[ "$TRAVIS_TEST_RESULT" == 0 ]]; then ./cc-test-reporter upload-coverage; fi
