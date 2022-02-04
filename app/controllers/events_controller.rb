@@ -32,7 +32,7 @@ class EventsController < ApplicationController
   def edit; end
 
   def update
-    if Events::Services::UpdateEvent.new(@event, event_params).call
+    if Events::Services::Update.new(@event, event_params).call
       redirect_to event_path(@event), notice: t('.success')
     else
       render :edit

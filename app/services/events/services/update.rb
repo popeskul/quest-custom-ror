@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-# Service for UpdateEvent
+# Service for Update
 # examples:
-# - Events::Services::UpdateEvent.new(events, {}).call
+# - Events::Services::Update.new(events, {}).call
 
 module Events
   module Services
-    # Implement UpdateEvent
-    class UpdateEvent
+    # Implement Update
+    class Update
       attr_reader :event
 
       def initialize(event, options = {})

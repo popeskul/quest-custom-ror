@@ -2,11 +2,11 @@
 
 require 'rails_helper'
 
-RSpec.describe Events::Services::UpdateEvent do
+RSpec.describe Events::Services::Update do
   let(:existing_user) { create(:user) }
   let(:options) { attributes_for(:event) }
   let(:existing_event) { create(:event, options) }
-  let(:update_event) { Events::Services::UpdateEvent.new(existing_event, options).call }
+  let(:update_event) { Events::Services::Update.new(existing_event, options).call }
 
   describe '#call' do
     it 'invoke the call method and return correct object' do
