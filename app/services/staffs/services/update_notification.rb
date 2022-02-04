@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-# Service for UpdateStaff
+# Service for UpdateNotification
 # examples:
-# - Staffs::Services::UpdateStaff.new(staff, options).call
+# - Staffs::Services::UpdateNotification.new(staff, options).call
 
 module Staffs
   module Services
-    # Implement UpdateStaff
-    class UpdateStaff
+    # Implement UpdateNotification
+    class UpdateNotification
       attr_reader :staff
 
       def initialize(staff, options = {})
