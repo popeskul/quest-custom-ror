@@ -16,7 +16,7 @@ class TagSubscriptionsController < ApplicationController
 
     if @tag_subscription.save
       create_user unless User.find_by(email: @tag_subscription.email)
-      send_email
+      send_subscription_email
 
       redirect_to root_path, notice: t('.success')
     else
@@ -38,14 +38,14 @@ class TagSubscriptionsController < ApplicationController
     User.create(
       email: @tag_subscription.email, password: User.generate_token, reset_password_token: User.generate_token
     )
+    UserMailer.signup_by_email(@tag_subscription.email).deliver_now
   end
 
   def check_tag_subscription_policy
     check_policy TagSubscriptionPolicy, @tag_subscription
   end
 
-  def send_email
-    UserMailer.signup_by_email(@tag_subscription.email).deliver_now
+  def send_subscription_email
     TagSubscriptionMailer.subscription_created(@tag_subscription).deliver_later
   end
 end
