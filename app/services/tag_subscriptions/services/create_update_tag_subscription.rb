@@ -30,7 +30,7 @@ module TagSubscriptions
       end
 
       def create_tag_subscription
-        TagSubscription.new(@tag_params)
+        TagSubscription.create(@tag_params)
       end
     end
   end

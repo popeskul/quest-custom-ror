@@ -14,7 +14,7 @@ class TagSubscriptionsController < ApplicationController
   def create
     @tag_subscription = TagSubscriptions::Services::CreateUpdateTagSubscription.new(tag_subscription_params).call
 
-    if @tag_subscription.save
+    if @tag_subscription.valid?
       create_user unless User.find_by(email: @tag_subscription.email)
       send_subscription_email
 
