@@ -2,55 +2,33 @@
 
 require 'rails_helper'
 
-feature 'User can moderate an event', '
-  In order to moderate an event, user need to go
+feature 'User can approve an event', '
+  In order to approve an event, user need to go
   to the form page and fill the form
 ' do
   context 'Authenticated user' do
     context 'as Admin' do
       given!(:existing_admin) { create(:staff) }
+      given!(:create_event) { create(:event, event_postable: existing_admin) }
+
+      background do
+        sign_in(existing_admin)
+        visit admin_moderation_events_url
+      end
 
       describe 'with his own event' do
-        given!(:existing_event) { create(:event, event_postable: existing_admin) }
-
-        background do
-          sign_in(existing_admin)
-          visit admin_moderation_events_url
-        end
-
         it 'approve an event' do
           click_on t('admin.events.event.approve')
 
           expect(body).to have_content t('admin.moderation_events.approve.success')
-        end
-
-        it 'decline an event' do
-          click_on t('admin.events.event.approve')
-          click_on t('admin.events.event.decline')
-
-          expect(body).to have_content t('admin.moderation_events.decline.success')
         end
       end
 
       describe 'with not his own event' do
-        given!(:existing_event) { create(:event) }
-
-        background do
-          sign_in(existing_admin)
-          visit admin_moderation_events_url
-        end
-
         it 'approve an event' do
           click_on t('admin.events.event.approve')
 
           expect(body).to have_content t('admin.moderation_events.approve.success')
-        end
-
-        it 'decline an event' do
-          click_on t('admin.events.event.approve')
-          click_on t('admin.events.event.decline')
-
-          expect(body).to have_content t('admin.moderation_events.decline.success')
         end
       end
     end

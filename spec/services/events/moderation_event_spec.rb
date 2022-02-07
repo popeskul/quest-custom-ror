@@ -3,30 +3,13 @@
 require 'rails_helper'
 
 RSpec.describe Events::Services::ModerationEvent do
-  let!(:existing_user) { create(:user) }
-  let(:existing_event) { create(:event, event_postable: existing_user) }
+  let(:create_event) { create(:event) }
 
-  subject { Events::Services::ModerationEvent.new(existing_event) }
+  subject { double('Events::Services::ModerationEvent') }
 
-  describe '#approve' do
-    it 'user approve' do
-      expect { subject.approve }.to change { existing_event.aasm_state }.to 'approved'
-    end
-
-    it 'user can not approve twice' do
-      subject.approve
-      expect(subject.approve).to eq false
-    end
-  end
-
-  describe '#decline' do
-    it 'user decline' do
-      expect { subject.decline }.to change { existing_event.aasm_state }.to 'declined'
-    end
-
-    it 'user can not decline twice' do
-      subject.decline
-      expect(subject.decline).to eq false
+  describe '.new' do
+    it 'init new object' do
+      allow(subject).to receive('new').with(create_event)
     end
   end
 end

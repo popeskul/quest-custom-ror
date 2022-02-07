@@ -9,11 +9,12 @@ RSpec.describe DeliveredUserEvent, type: :model do
   end
 
   describe 'Scopes' do
-    let!(:event) { create(:event) }
-    let!(:user) { create(:user) }
-    let!(:delivered_user_event) { create(:delivered_user_event, user: user, event: event) }
+    let(:event) { create(:event) }
+    let(:user) { create(:user) }
+    let(:delivered_user_event) { create(:delivered_user_event, user: user, event: event) }
 
     it '.delivered_by' do
+      delivered_user_event
       found_delivered = DeliveredUserEvent.delivered_by(event_id: event.id, user_id: user.id).first
 
       expect(found_delivered.event_id).to eq delivered_user_event.event_id

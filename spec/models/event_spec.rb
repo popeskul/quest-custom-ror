@@ -63,10 +63,11 @@ RSpec.describe Event, type: :model do
   end
 
   describe 'Scopes' do
-    let!(:user) { build(:user) }
-    let!(:event) { create(:event, :pending) }
+    let(:user) { create(:user) }
+    let(:event) { create(:event, event_postable: user) }
 
     it '.for_moderation' do
+      event
       expect(Event.for_moderation.uniq).to eq [event]
     end
   end
