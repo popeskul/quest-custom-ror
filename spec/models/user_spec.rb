@@ -12,8 +12,4 @@ RSpec.describe User, type: :model do
     it { should validate_presence_of :email }
     it { should validate_presence_of :password }
   end
-
-  describe '.generate_token' do
-    it { expect(User.generate_token).to have_attributes(size: 20) }
-  end
 end

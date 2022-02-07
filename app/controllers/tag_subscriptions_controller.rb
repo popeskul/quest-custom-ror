@@ -36,7 +36,7 @@ class TagSubscriptionsController < ApplicationController
 
   def create_user
     User.create(
-      email: @tag_subscription.email, password: User.generate_token, reset_password_token: User.generate_token
+      email: @tag_subscription.email, password: GenerateRandomToken.call, reset_password_token: GenerateRandomToken.call
     )
     UserMailer.signup_by_email(@tag_subscription.email).deliver_now
   end
