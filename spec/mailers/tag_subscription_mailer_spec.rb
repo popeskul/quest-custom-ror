@@ -35,9 +35,8 @@ RSpec.describe TagSubscriptionMailer, type: :mailer do
     end
 
     it 'renders the body' do
-      body = mail.body.encoded
-      expect(body).to match t('tag_subscription_mailer.digest.title')
-      expect(body).to match t('tag_subscription_mailer.digest.description', email: user.email)
+      expect(mail.body.encoded).to match t('tag_subscription_mailer.digest.title')
+      expect(mail.body.encoded).to match t('tag_subscription_mailer.digest.description', email: user.email)
     end
 
     it 'checks first 5 events' do
