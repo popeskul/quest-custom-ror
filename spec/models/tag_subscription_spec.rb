@@ -9,6 +9,7 @@ RSpec.describe TagSubscription, type: :model do
     it { should validate_presence_of :email }
     it { should validate_uniqueness_of :email }
     it { should validate_presence_of :tags }
+    it { should allow_value('user_id_num').for(:user_id) }
 
     it { should allow_value('good@email.com').for(:email) }
     it { should_not allow_value('bad').for(:email) }

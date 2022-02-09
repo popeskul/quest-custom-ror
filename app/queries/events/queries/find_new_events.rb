@@ -16,22 +16,21 @@ module Events
       end
 
       def call
-        ids_for_search = subscription_events.map(&:id) - delivered_events.map(&:event_id)
+        ids_for_search = subscription_events.map(&:id).reject do |id|
+          delivered_subscriptions&.event_ids&.include?(id.to_s)
+        end
+
         Event.find(ids_for_search)&.first(LIMIT_OF_EVENTS)
       end
 
       private
 
-      def user
-        @user ||= User.find_by_email(@tag_subscription.email)
-      end
-
       def tags
         @tags ||= TagSubscription.find_tags(@tag_subscription.tags)
       end
 
-      def delivered_events
-        DeliveredUserEvent.delivered_by(event_id: subscription_events.map(&:id), user_id: user.id)
+      def delivered_subscriptions
+        DeliveredTagSubscription.find_by(tag_subscription_id: @tag_subscription.id)
       end
 
       def subscription_events

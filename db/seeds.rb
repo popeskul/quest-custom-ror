@@ -1,10 +1,10 @@
 # Create users
-staff, _ = Staff.create!([
+staff, _ = Staff.create([
                            { email: "admin@mail.com", password: "123123" },
                            { email: "super-admin@mail.com", password: "123123", role: "super_admin" }
                          ])
 
-user, user2 = User.create!([
+user, user2 = User.create([
                              { email: "user@mail.com", password: "123123" },
                              { email: "user2@mail.com", password: "123123" }
                            ])
@@ -15,7 +15,7 @@ music_tag = Tags::Services::CreateTag.new(name: "music", keys: "soad, metallica"
 dev_tag = Tags::Services::CreateTag.new(name: "development", keys: "ruby, backend, programming").call
 
 # Create subscriptions by tags
-TagSubscription.create!([
+tags = TagSubscription.create([
                           { email: user.email, tags: [movie_tag.name, music_tag.name] },
                           { email: user2.email, tags: [dev_tag.name] }
                         ])
@@ -48,3 +48,6 @@ event1, event2 = Event.create!([
 # approving an event
 event1.approve!
 event2.decline!
+
+# Create delivered subscriptions by tags
+DeliveredTagSubscription.create(tag_subscription_id: tags[0].id, email: tags[0].email, event_ids: [event1.id, event2.id])

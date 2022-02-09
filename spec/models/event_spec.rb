@@ -5,7 +5,6 @@ require 'rails_helper'
 RSpec.describe Event, type: :model do
   describe 'Relations' do
     it { should belong_to(:event_postable) }
-    it { should have_many(:delivered_user_events) }
   end
 
   describe 'Validations' do

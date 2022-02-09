@@ -30,7 +30,15 @@ module TagSubscriptions
       end
 
       def create_tag_subscription
-        TagSubscription.create(@tag_params)
+        if user
+          TagSubscription.create(@tag_params.merge(user_id: user.id))
+        else
+          TagSubscription.create(@tag_params)
+        end
+      end
+
+      def user
+        @user ||= User.find_by(email: @tag_params[:email])
       end
     end
   end

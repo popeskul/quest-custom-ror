@@ -10,14 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_15_095154) do
+ActiveRecord::Schema.define(version: 2022_02_07_204146) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "delivered_user_events", id: false, force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "event_id", null: false
+  create_table "delivered_tag_subscriptions", force: :cascade do |t|
+    t.string "tag_subscription_id", null: false
+    t.string "email", null: false
+    t.string "event_ids", null: false, array: true
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "events", force: :cascade do |t|
@@ -57,6 +60,7 @@ ActiveRecord::Schema.define(version: 2021_12_15_095154) do
 
   create_table "tag_subscriptions", force: :cascade do |t|
     t.string "email", null: false
+    t.string "user_id"
     t.string "tags", null: false, array: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

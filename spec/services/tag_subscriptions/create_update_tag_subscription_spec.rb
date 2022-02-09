@@ -3,16 +3,28 @@
 require 'rails_helper'
 
 RSpec.describe TagSubscriptions::Services::CreateUpdateTagSubscription do
-  let(:tag_options) { attributes_for(:tag_subscription) }
+  let(:user) { create(:user) }
+  let(:tag_options) { attributes_for(:tag_subscription, user_id: nil) }
   let(:new_tag_options) { tag_options.merge(tags: ['new']) }
+  let(:user_tag_options) { attributes_for(:tag_subscription, email: user.email) }
 
-  let(:tag_subscription) { TagSubscriptions::Services::CreateUpdateTagSubscription.new(tag_options).call.tap(&:save) }
+  let(:tag_subscription) { TagSubscriptions::Services::CreateUpdateTagSubscription.new(tag_options).call }
+  let(:tag_subscription_with_user) do
+    TagSubscriptions::Services::CreateUpdateTagSubscription.new(user_tag_options).call
+  end
   let(:update_tag_subscription) do
-    TagSubscriptions::Services::CreateUpdateTagSubscription.new(new_tag_options).call.tap(&:save)
+    TagSubscriptions::Services::CreateUpdateTagSubscription.new(new_tag_options).call
   end
 
-  it 'create' do
-    expect(TagSubscription.find(tag_subscription.id)).to eq tag_subscription
+  describe 'create' do
+    it "if user doesn't exist" do
+      expect(TagSubscription.find(tag_subscription.id)).to eq tag_subscription
+    end
+
+    it 'if user exist' do
+      user
+      expect(TagSubscription.find(tag_subscription_with_user.id).id).to eq tag_subscription_with_user.id
+    end
   end
 
   describe 'update' do

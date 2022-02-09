@@ -8,8 +8,6 @@ class Event < ApplicationRecord
 
   belongs_to :event_postable, polymorphic: true, foreign_key: 'event_postable_id'
 
-  has_many :delivered_user_events, foreign_key: :event_id, dependent: :destroy
-
   validates :title, presence: true
   validates :location, presence: true
   validates :organizer_email, format: { with: URI::MailTo::EMAIL_REGEXP, message: I18n.t('validators.invalid_email') }
