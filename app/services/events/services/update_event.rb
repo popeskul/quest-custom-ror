@@ -2,12 +2,12 @@
 
 # Service for Update
 # examples:
-# - Events::Services::Update.new(events, {}).call
+# - Events::Services::UpdateEvent.new(events, {}).call
 
 module Events
   module Services
     # Implement Update
-    class Update
+    class UpdateEvent
       attr_reader :event
 
       def initialize(event, options = {})
