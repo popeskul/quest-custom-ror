@@ -16,9 +16,7 @@ module Events
       end
 
       def call
-        ids_for_search = subscription_events.map(&:id).reject do |id|
-          delivered_subscriptions&.event_ids&.include?(id.to_s)
-        end
+        ids_for_search = subscription_events.map(&:id) - [*delivered_subscriptions&.event_ids].map(&:to_i)
 
         Event.find(ids_for_search)&.first(LIMIT_OF_EVENTS)
       end
