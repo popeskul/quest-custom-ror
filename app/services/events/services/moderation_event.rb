@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 # ModerationEvent service
+# Use cases:
+# - when need to moderate an event
 # examples:
 # - Events::Services::ModerationEvent.new(event)
 

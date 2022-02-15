@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 # SendWeeklyDigest service
+# Use cases:
+# - when need to send weekly an email with new events for each tag subscriptions
 # examples:
 # - TagSubscriptions::Services::SendWeeklyDigest.new.call
 

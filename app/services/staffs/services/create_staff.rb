@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 # Service CreateStaff
+# Use cases:
+# - when need to create a staff
 # examples:
 # - Staffs::Services::CreateStaff.new(options).call
 # - options it's params from Staff model

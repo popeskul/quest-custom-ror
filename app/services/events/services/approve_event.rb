@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 # ApproveEvent service
+# Use cases:
+# - when need to approve an event
 # examples:
 # - Events::Services::ApproveEvent.new(event)
 

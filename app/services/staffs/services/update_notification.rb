@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 # Service for UpdateNotification
+# Use case:
+# - when user updates a staff account and send an email
 # examples:
 # - Staffs::Services::UpdateNotification.new(staff, options).call
 

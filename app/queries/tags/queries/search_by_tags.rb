@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 # SearchByTags service
+# Use cases:
+# - when need to find tags by text
 # examples:
 # - Tags::Queries::SearchByTags.new('Some long text', tags).call
 # results: [], [Tag, Tag, ...]

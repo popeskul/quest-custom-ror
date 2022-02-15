@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 # Service for SendCreatedEventEmail
+# Use cases:
+# - when need to send an email notification after an event was created
 # examples:
 # - Staffs::Services::SendCreatedEventEmail.new(event).call
 

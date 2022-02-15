@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 # DeclineEvent service
+# Use cases:
+# - when need to decline an event
 # examples:
 # - Events::Services::DeclineEvent.new(event)
 

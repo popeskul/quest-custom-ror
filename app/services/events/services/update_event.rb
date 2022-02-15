@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 # Service for Update
+# Use cases:
+# - when need to update an event
 # examples:
 # - Events::Services::UpdateEvent.new(events, {}).call
 

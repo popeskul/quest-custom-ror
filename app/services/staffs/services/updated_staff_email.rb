@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 # Service for UpdatedStaffEmail
+# Use cases:
+# - when need to send an email after a staff was updated
 # examples:
 # - Staffs::Services::UpdatedStaffEmail.new(staff).call
 

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 # Service for CreateEvent
+# Use cases:
+# - when need to create an event
 # examples:
 # - Events::Services::CreateEvent.new(user, {})
 # - options for events and tag_list

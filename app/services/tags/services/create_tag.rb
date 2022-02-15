@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 # Service CreateTag
+# Use cases:
+# - when need to create a tag
 # examples:
 # - Tags::Services::CreateTag.new(name: 'backend', keys: 'ruby, python').call
 

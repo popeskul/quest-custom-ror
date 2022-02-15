@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 # CreateUpdateTagSubscription service
-# Create TagSubscription
-# If we have TagSubscription then we need to delete and create with new tags
+# Use cases:
+# - when need to create a new tag subscriptions by tag words
 # examples:
 # - TagSubscriptions::Services::CreateUpdateTagSubscription.new(tag_params)
 

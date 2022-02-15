@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 # FindNewEvents service
+# Use cases:
+# - when need to find new events which have never been delivered earlier
 # examples:
 # - Events::Queries::FindNewEvents.new(tag_subscription).call
 # results: [], [Event, Event, ...]

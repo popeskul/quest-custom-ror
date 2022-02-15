@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 # Service for SendNewEvents
+# Use cases:
+# - when need to send new tag subscriptions with events
 # examples:
 # - TagSubscriptions::Services::SendNewEvents.new(tag_subscription).call
 
