@@ -24,7 +24,7 @@ module Staffs
       private
 
       def send_email
-        Staffs::Services::CreatedStaffEmail.call(@staff).deliver
+        @staff.send_reset_password_instructions
       end
     end
   end
