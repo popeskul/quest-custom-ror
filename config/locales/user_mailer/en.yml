@@ -1,0 +1,7 @@
+---
+en:
+  user_mailer:
+    signup_by_email:
+      description: Hello %{email}! An account has been generated for you
+      subject: Create your own account for subscription
+      title: Confirm account for subscription

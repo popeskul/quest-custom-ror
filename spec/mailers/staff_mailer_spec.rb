@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe StaffMailer, type: :mailer do
-  describe 'staff_updated' do
+  describe '.staff_updated' do
     let(:admins) { create_list(:staff, 2) }
 
     it 'renders the headers' do

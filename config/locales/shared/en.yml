@@ -1,0 +1,8 @@
+---
+en:
+  shared:
+    header:
+      all-events: All events
+      enter-as: Enter as %{user}
+      log-out: Log out
+      registration: Registration

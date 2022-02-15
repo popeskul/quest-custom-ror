@@ -20,7 +20,7 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = Services::CreateEvent.new(app_current_user, event_params).call
+    @event = Events::Services::CreateEvent.new(app_current_user, event_params).call
 
     if @event.save
       redirect_to event_path(@event), notice: t('.success')
@@ -32,7 +32,7 @@ class EventsController < ApplicationController
   def edit; end
 
   def update
-    if Services::UpdateEvent.new(@event, event_params).call
+    if Events::Services::UpdateEvent.new(@event, event_params).call
       redirect_to event_path(@event), notice: t('.success')
     else
       render :edit

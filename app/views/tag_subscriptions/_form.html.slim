@@ -1,0 +1,16 @@
+= simple_form_for @tag_subscription, local: true do |f|
+  p = t('tag_subscriptions.title')
+
+  .flash= render 'shared/errors', resource: @tag_subscription
+
+  .mb-3
+    = f.input :email, label_html: { class: 'form-label' }, input_html: { class: 'form-control', value: current_user&.email }
+
+  = f.collection_check_boxes :tags, @tags.all, :name, :name, include_hidden: false do |b|
+    .mb-3
+      .form-check
+        = b.label class: 'form-check-label'
+        = b.check_box class: 'form-check-input', value: 1
+
+  .mb-3
+    = f.button :submit, class: 'btn btn-primary'

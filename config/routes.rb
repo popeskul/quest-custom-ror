@@ -28,4 +28,6 @@ Rails.application.routes.draw do
   end
 
   resources :events
+
+  resources :tag_subscriptions, only: [:new, :create]
 end

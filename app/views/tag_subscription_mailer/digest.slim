@@ -1,0 +1,9 @@
+h1 = t('.title')
+
+p = t('.description', email: @email, tags: @tags.join(', '))
+
+p = t('.events')
+ul
+  - @events.each do |event|
+    li
+      = link_to event.title, event_url(event)

@@ -21,5 +21,10 @@ FactoryBot.define do
     trait :invalid_email do
       email { '123' }
     end
+
+    trait :no_password do
+      password { nil }
+      password_confirmation { nil }
+    end
   end
 end

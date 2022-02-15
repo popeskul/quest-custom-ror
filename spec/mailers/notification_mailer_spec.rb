@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe NotificationMailer, type: :mailer do
-  describe 'event_created' do
+  describe '.event_created' do
     let(:users) { create_list(:staff, 2) }
     let(:event) { create(:event) }
 

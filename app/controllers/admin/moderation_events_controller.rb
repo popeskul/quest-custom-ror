@@ -14,7 +14,7 @@ module Admin
     end
 
     def approve
-      if Services::ModerationEvent.new(@event).approve
+      if Events::Services::ApproveEvent.new(@event).call
         redirect_to admin_moderation_events_path, notice: t('.success')
       else
         redirect_to admin_moderation_events_path, flash: { danger: t('.failure') }
@@ -22,7 +22,7 @@ module Admin
     end
 
     def decline
-      if Services::ModerationEvent.new(@event).decline
+      if Events::Services::DeclineEvent.new(@event).call
         redirect_to admin_moderation_events_path, notice: t('.success')
       else
         redirect_to admin_moderation_events_path, flash: { danger: t('.failure') }

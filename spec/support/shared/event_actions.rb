@@ -11,7 +11,7 @@ shared_examples_for 'Update en event by form' do
       fill_in 'Title', with: title
       select tag_name, from: 'event[tag_list][]'
 
-      click_on t('helpers.submit.admin.event.update')
+      click_on t('helpers.submit.event.update')
     end
 
     expect(page).to have_content t('.admin.events.update.success')
@@ -24,7 +24,7 @@ shared_examples_for 'Delete an event' do
   it 'can delete an event' do
     visit event_path(event)
 
-    click_on t('.admin.events.show.button.delete')
+    click_on t('.events.show.button.delete')
 
     expect(page).to have_content t('.admin.events.destroy.success')
   end
@@ -36,18 +36,18 @@ shared_examples_for 'Create an event' do
     tag_name = ActsAsTaggableOn::Tag.first.name
 
     within '.new_event' do
-      fill_in t('.simple_form.labels.admin.event.title'), with: title
-      fill_in t('.simple_form.labels.admin.event.location'), with: 'location location'
-      fill_in t('.simple_form.labels.admin.event.organizer_email'), with: 'email@mail.com'
+      fill_in t('.simple_form.labels.event.title'), with: title
+      fill_in t('.simple_form.labels.event.location'), with: 'location location'
+      fill_in t('.simple_form.labels.event.organizer_email'), with: 'email@mail.com'
 
-      fill_in t('.simple_form.labels.admin.event.start_time'), with: '2021-09-03'
-      fill_in t('.simple_form.labels.admin.event.end_time'), with: '2022-09-03'
+      fill_in t('.simple_form.labels.event.start_time'), with: '2021-09-03'
+      fill_in t('.simple_form.labels.event.end_time'), with: '2022-09-03'
       select tag_name, from: 'event[tag_list][]'
 
-      click_on t('helpers.submit.admin.event.create')
+      click_on t('events.index.button.create')
     end
 
-    expect(page).to have_content t('.admin.events.create.success')
+    expect(page).to have_content t('.events.create.success')
     expect(page).to have_content title
     expect(page).to have_content tag_name
   end

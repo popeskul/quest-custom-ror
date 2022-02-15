@@ -6,6 +6,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :events, as: :event_postable, foreign_key: 'event_postable_id', dependent: :destroy
-
-  scope :for_admin, -> { where(admin: true) }
+  has_many :tag_subscriptions, foreign_key: :user_id, dependent: :destroy
 end

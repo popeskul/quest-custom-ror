@@ -1,0 +1,31 @@
+---
+en:
+  helpers:
+    submit:
+      event:
+        create: Create Event
+        update: Update Event
+      tag_subscription:
+        create: Create Tag Subscription
+  simple_form:
+    labels:
+      admin:
+        staffs:
+          new:
+            email: Email
+        tag:
+          create: Create Tag
+          keys: Keys
+          name: Name
+      event:
+        description: Description
+        end_time: End time
+        link: Link
+        location: Location
+        organizer_email: Organizer email
+        organizer_telegram: Organizer telegram
+        start_time: Start time
+        title: Title
+      tag_subscription:
+        new:
+          email: Email

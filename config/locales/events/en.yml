@@ -1,0 +1,27 @@
+---
+en:
+  admin:
+    events:
+      destroy:
+        success: Event was successfully deleted.
+      event:
+        approve: approve
+        decline: decline
+      update:
+        success: Your event successfully updated.
+  events:
+    create:
+      success: Your event successfully created.
+    destroy:
+      success: Event was successfully deleted.
+    index:
+      button:
+        create: Create Event
+        moderate: Moderate events
+    show:
+      button:
+        delete: Delete event
+        edit: Edit Event
+      status-is: status - %{status}
+    update:
+      success: Your event successfully updated.

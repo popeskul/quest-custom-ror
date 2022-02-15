@@ -1,0 +1,14 @@
+---
+en:
+  admin:
+    staffs:
+      create:
+        success: You create admin successfully.
+      destroy:
+        success: You successfully delete admin.
+      index:
+        create: Create new Admin
+      staff:
+        delete: Delete Admin
+      update:
+        success: You successfully update admin.

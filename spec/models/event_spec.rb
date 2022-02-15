@@ -60,4 +60,14 @@ RSpec.describe Event, type: :model do
       expect(event.tag_list).to eq ['tag2']
     end
   end
+
+  describe 'Scopes' do
+    let(:user) { create(:user) }
+    let(:event) { create(:event, event_postable: user) }
+
+    it '.for_moderation' do
+      event
+      expect(Event.for_moderation.uniq).to eq [event]
+    end
+  end
 end

@@ -23,7 +23,7 @@ feature 'Staff can edit a tag', '
           within '.edit_acts_as_taggable_on_tag' do
             fill_in t('.simple_form.labels.admin.tag.name'), with: tag_name
 
-            click_on t('helpers.submit.acts_as_taggable_on_tag.update')
+            click_on t('.helpers.submit.acts_as_taggable_on_tag.update')
           end
 
           expect(page).to have_content t('admin.tags.update.success')

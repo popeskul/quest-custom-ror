@@ -1,9 +1,0 @@
-en:
-  admin:
-    tags:
-      create:
-        success: "Tag successfully created."
-      index:
-        create: "Create a new tag"
-      destroy:
-        success: "Tag successfully deleted."
