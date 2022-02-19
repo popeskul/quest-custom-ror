@@ -2,8 +2,8 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: <%= ENV.fetch("DB_USER") { 'postgres' } %>
-  password: <%= ENV.fetch("DB_PASS") { 'postgres' } %>
+  username: <%= ENV.fetch("POSTGRES_USER") { 'postgres' } %>
+  password: <%= ENV.fetch("POSTGRES_PASSWORD") { 'postgres' } %>
 
 development:
   <<: *default
@@ -17,5 +17,6 @@ test:
 production:
   <<: *default
   database: quest_custom_ror_production
-  username: quest_custom_ror
-  password: <%= ENV['QUEST_CUSTOM_ROR_DATABASE_PASSWORD'] %>
+  username: <%= ENV.fetch("POSTGRES_USER") { 'postgres' } %>
+  password: <%= ENV.fetch("POSTGRES_PASSWORD") { 'postgres' } %>
+  host: db
